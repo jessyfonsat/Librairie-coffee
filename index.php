@@ -1,3 +1,7 @@
+<?php 
+$page = $_GET['page'] ?? 'accueil';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -118,10 +122,10 @@
 
   <header>
     <nav>
-      <a href="#">Accueil</a>
-      <a href="#">Menu</a>
-      <a href="#">Librairie</a>
-      <a href="#">À propos</a>
+      <a href="index.php?page=accueil">Accueil</a>
+      <a href="index.php?page=menu">Menu</a>
+      <a href="index.php?page=librairie">Librairie</a>
+      <a href="index.php?page=apropos">À propos</a>
     </nav>
     <div class="logo">Sépia & Moka</div>
     <div>🛒</div>
@@ -131,51 +135,36 @@
     <span>Profiter de nos boissons chaudes et de nos livres!</span>
   </div>
 
-  <section class="hero">
-    Bienvenue chère lecteurs,<br>
-    CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFE!
-  </section>
+  <?php if ($page == 'accueil') : ?>
+    <section class="hero">
+      Bienvenue chère lecteurs,<br>
+      CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFE!
+    </section>
+  <?php endif; ?>
 
-  <section class="lines">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </section>
+  <main>
+    <?php
+      if ($page == 'accueil') {
+        include 'accueil.php';
+      }
 
-  <h3 class="section-title">Parce que nous savons que vous les aimerez :p </h3>
+      elseif ($page == 'menu') {
+        include 'coffee.html';
+      }
 
-  <section class="products">
-    <div class="product">
-    <img src="103507218.jpg" alt="Macha" width="150" height="170">
-      <div>Macha<br>7€</div>
-    </div>
+      elseif ($page == 'librairie') {
+        include 'Produits.php';
+      }
 
-    <div class="product">
-      <img src="63d1e7f3-be97-494b-bc2e-2c5fc7e9b99d_bSPeBjy.jpg" alt="Moka" width="150" height="170">
-      <div>Moka<br>5€</div>
-    </div>
+      elseif ($page == 'apropos') {
+        include 'apropos.html';
+      }
 
-    <div class="product">
-      <img src="Chai.jpg" alt="Chai" width = "150" height="170">
-      <div>Chai<br>5€</div>
-    </div>
-
-    <div class="product">
-     <img src="1055859-fu-patisserie-et-coffee-shop-paris-13e-cafe-latte.jpg" alt="Café" width="150" height="170">
-      <div>Café<br>3€</div>
-    </div>
-
-    <div class="product">
-      <img src="site-malongo-5-1024x614.jpg" alt="Latte" width="150" height="170">
-      <div>Latte<br>4,50€</div>
-    </div>
-
-    <div class="product">
-      <div class="bottle"></div>
-      <div>Sépia<br>7€</div>
-    </div>
-  </section>
+      else {
+        echo "<p>Page non trouvée.</p>";
+      }
+    ?>
+  </main>
 
   <footer></footer>
 
