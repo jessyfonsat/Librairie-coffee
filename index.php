@@ -145,7 +145,7 @@ $page = $_GET['page'] ?? 'accueil';
   <main>
     <?php
       if ($page == 'accueil') {
-        include 'accueil.php';
+        include 'acceuil.php';
       }
 
       elseif ($page == 'menu') {
