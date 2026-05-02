@@ -11,6 +11,7 @@ async function apiGet(action, params = {}) {
     url.searchParams.set('action', action);
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
     const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.json();
 }
 
@@ -19,6 +20,7 @@ async function apiPost(action, data = {}) {
     body.append('action', action);
     Object.entries(data).forEach(([k, v]) => body.append(k, v));
     const res = await fetch(API, { method: 'POST', body });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.json();
 }
 
@@ -28,6 +30,7 @@ async function apiPostFile(action, data = {}, fileField, file) {
     Object.entries(data).forEach(([k, v]) => body.append(k, v));
     if (file) body.append(fileField, file);
     const res = await fetch(API, { method: 'POST', body });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
     return res.json();
 }
 
@@ -35,10 +38,18 @@ async function apiPostFile(action, data = {}, fileField, file) {
 
 let _currentUser = null;
 
+// FIX BOUCLE INFINIE :
+// Ancienne logique : fetchMe → updateAuthUI → renderProducts → (fetchMe via DOMContentLoaded = boucle)
+// Nouvelle logique : fetchMe → updateAuthUI(skipRender=true) → rien
+//                   renderProducts est appelé UNE SEULE FOIS explicitement par chaque page HTML
 async function fetchMe() {
-    const data = await apiGet('me');
-    _currentUser = data.user || null;
-    updateAuthUI();
+    try {
+        const data = await apiGet('me');
+        _currentUser = data.user || null;
+    } catch (e) {
+        _currentUser = null;
+    }
+    updateAuthUI(true); // skipRender=true : pas de renderProducts ici
     return _currentUser;
 }
 
@@ -46,15 +57,13 @@ function getCurrentUser() { return _currentUser; }
 function isAdmin() { return _currentUser && _currentUser.role === 'admin'; }
 
 async function logout() {
-    await apiPost('logout');
+    try { await apiPost('logout'); } catch (e) { /* ignore */ }
     _currentUser = null;
-    updateAuthUI();
-    if (typeof _currentCategory !== 'undefined') {
-        renderProducts(_currentCategory, _currentContainerId);
-    }
+    updateAuthUI(false); // skipRender=false : on re-rend les produits après logout
 }
 
-function updateAuthUI() {
+// FIX : skipRender contrôle si on re-déclenche renderProducts
+function updateAuthUI(skipRender = false) {
     const user = _currentUser;
     document.querySelectorAll('.auth-area').forEach(el => {
         if (user) {
@@ -65,7 +74,8 @@ function updateAuthUI() {
     });
     const banner = document.getElementById('admin-banner');
     if (banner) banner.style.display = isAdmin() ? 'block' : 'none';
-    if (typeof _currentCategory !== 'undefined') {
+
+    if (!skipRender && _currentCategory !== undefined && _currentContainerId !== undefined) {
         renderProducts(_currentCategory, _currentContainerId);
     }
 }
@@ -74,7 +84,7 @@ function updateAuthUI() {
 
 function openModal(tab) {
     const m = document.getElementById('auth-modal');
-    if (m) { m.style.display = 'flex'; switchTab(tab); }
+    if (m) { m.style.display = 'flex'; switchTab(tab || 'login'); }
 }
 function closeModal() {
     const m = document.getElementById('auth-modal');
@@ -91,10 +101,19 @@ async function handleLogin(e) {
     const email = document.getElementById('login-email').value;
     const pass  = document.getElementById('login-pass').value;
     const msg   = document.getElementById('login-msg');
-    msg.textContent = 'Connexion…';
-    const data = await apiPost('login', { email, password: pass });
-    if (data.ok) { _currentUser = data.user; closeModal(); updateAuthUI(); }
-    else msg.textContent = data.error;
+    msg.textContent = 'Connexion...';
+    try {
+        const data = await apiPost('login', { email, password: pass });
+        if (data.ok) {
+            _currentUser = data.user;
+            closeModal();
+            updateAuthUI(false); // re-rend les produits avec boutons admin si admin
+        } else {
+            msg.textContent = data.error;
+        }
+    } catch (e) {
+        msg.textContent = 'Erreur de connexion au serveur.';
+    }
 }
 
 async function handleRegister(e) {
@@ -106,10 +125,19 @@ async function handleRegister(e) {
     const pass2  = document.getElementById('reg-pass2').value;
     const msg    = document.getElementById('reg-msg');
     if (pass !== pass2) { msg.textContent = 'Les mots de passe ne correspondent pas.'; return; }
-    msg.textContent = 'Création du compte…';
-    const data = await apiPost('register', { prenom, nom, email, password: pass });
-    if (data.ok) { _currentUser = data.user; closeModal(); updateAuthUI(); }
-    else msg.textContent = data.error;
+    msg.textContent = 'Creation du compte...';
+    try {
+        const data = await apiPost('register', { prenom, nom, email, password: pass });
+        if (data.ok) {
+            _currentUser = data.user;
+            closeModal();
+            updateAuthUI(false);
+        } else {
+            msg.textContent = data.error;
+        }
+    } catch (e) {
+        msg.textContent = 'Erreur de connexion au serveur.';
+    }
 }
 
 // ─── CART (localStorage) ─────────────────────────────────────────────────────
@@ -186,9 +214,9 @@ function renderCart() {
 
 function showCartToast(name) {
     let t = document.getElementById('sm-toast');
-    if (!t) { t = document.createElement('div'); t.id = 'sm-toast'; document.body.appendChild(t); }
+    if (!t) { t = document.createElement('div'); t.id = 'sm-toast'; t.className = 'sm-toast'; document.body.appendChild(t); }
     t.textContent = `✓ "${name}" ajouté au panier`;
-    t.className = 'sm-toast show';
+    t.classList.add('show');
     clearTimeout(t._timeout);
     t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
 }
@@ -198,15 +226,26 @@ function showCartToast(name) {
 let _currentCategory    = undefined;
 let _currentContainerId = undefined;
 
+// FIX : renderProducts ne fait plus appel à fetchMe — pas de boucle possible
 async function renderProducts(category, containerId) {
     _currentCategory    = category;
     _currentContainerId = containerId;
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = '<p style="text-align:center;padding:40px;opacity:.5;">Chargement des produits…</p>';
+    container.innerHTML = '<p style="text-align:center;padding:40px;opacity:.5;">Chargement des produits...</p>';
 
-    const data = await apiGet('list', { type: category });
+    let data;
+    try {
+        data = await apiGet('list', { type: category });
+    } catch (e) {
+        container.innerHTML = `<p style="color:#c0392b;text-align:center;padding:20px;">
+            Impossible de contacter le serveur PHP.<br>
+            <small>Verifiez que XAMPP/WAMP est demarré et que le fichier api_produits.php est présent.</small>
+        </p>`;
+        return;
+    }
+
     if (!data.ok) {
         container.innerHTML = `<p style="color:#c0392b;text-align:center;padding:20px;">Erreur : ${escHtml(data.error)}</p>`;
         return;
@@ -214,6 +253,11 @@ async function renderProducts(category, containerId) {
 
     const produits = data.produits || [];
     const admin    = isAdmin();
+
+    if (produits.length === 0 && !admin) {
+        container.innerHTML = '<p style="text-align:center;padding:40px;opacity:.5;">Aucun produit pour le moment.</p>';
+        return;
+    }
 
     const cards = produits.map(p => {
         const imgSrc = p.image_produit || '';
@@ -255,9 +299,13 @@ async function renderProducts(category, containerId) {
 
 async function confirmDeleteProduct(id) {
     if (!confirm('Supprimer ce produit définitivement ?')) return;
-    const data = await apiPost('delete', { id });
-    if (data.ok) renderProducts(_currentCategory, _currentContainerId);
-    else alert('Erreur : ' + data.error);
+    try {
+        const data = await apiPost('delete', { id });
+        if (data.ok) renderProducts(_currentCategory, _currentContainerId);
+        else alert('Erreur : ' + data.error);
+    } catch (e) {
+        alert('Erreur de connexion au serveur.');
+    }
 }
 
 // ─── PRODUCT EDITOR ──────────────────────────────────────────────────────────
@@ -281,22 +329,28 @@ async function openProductEditor(category, id) {
     document.getElementById('pe-stock').value               = '';
     document.getElementById('pe-msg').textContent           = '';
     document.getElementById('pe-img-file').value            = '';
-    document.getElementById('pe-img-preview').style.display = 'none';
+    const prevImg = document.getElementById('pe-img-preview');
+    prevImg.style.display = 'none';
+    prevImg.src = '';
 
     if (id) {
-        document.getElementById('pe-msg').textContent = 'Chargement…';
-        const data = await apiGet('get', { id });
-        document.getElementById('pe-msg').textContent = '';
-        if (!data.ok) { alert('Erreur : ' + data.error); return; }
-        const p = data.produit;
-        document.getElementById('pe-name').value  = p.Nom_produit         || '';
-        document.getElementById('pe-desc').value  = p.description_produit || '';
-        document.getElementById('pe-price').value = p.prix_produit        || '';
-        document.getElementById('pe-stock').value = p.stock_produit       || '';
-        if (p.image_produit) {
-            const preview   = document.getElementById('pe-img-preview');
-            preview.src     = p.image_produit;
-            preview.style.display = 'block';
+        document.getElementById('pe-msg').textContent = 'Chargement...';
+        try {
+            const data = await apiGet('get', { id });
+            document.getElementById('pe-msg').textContent = '';
+            if (!data.ok) { alert('Erreur : ' + data.error); return; }
+            const p = data.produit;
+            document.getElementById('pe-name').value  = p.Nom_produit         || '';
+            document.getElementById('pe-desc').value  = p.description_produit || '';
+            document.getElementById('pe-price').value = p.prix_produit        || '';
+            document.getElementById('pe-stock').value = p.stock_produit       || '';
+            if (p.image_produit) {
+                prevImg.src = p.image_produit;
+                prevImg.style.display = 'block';
+            }
+        } catch (e) {
+            alert('Erreur de connexion au serveur.');
+            return;
         }
     }
 
@@ -313,8 +367,8 @@ function handleProductImageChange(input) {
     if (_pendingFile) {
         const reader = new FileReader();
         reader.onload = e => {
-            const preview     = document.getElementById('pe-img-preview');
-            preview.src       = e.target.result;
+            const preview = document.getElementById('pe-img-preview');
+            preview.src   = e.target.result;
             preview.style.display = 'block';
         };
         reader.readAsDataURL(_pendingFile);
@@ -328,33 +382,41 @@ async function saveProductEditor() {
     const stock = document.getElementById('pe-stock').value;
     const msg   = document.getElementById('pe-msg');
 
-    if (!name)                           { msg.textContent = 'Le nom est obligatoire.'; return; }
-    if (!desc)                           { msg.textContent = 'La description est obligatoire.'; return; }
-    if (!prix || parseFloat(prix) <= 0)  { msg.textContent = 'Le prix doit être un nombre positif.'; return; }
-    if (!_editorProductId && !_pendingFile) { msg.textContent = 'Veuillez choisir une image.'; return; }
+    if (!name)                          { msg.textContent = 'Le nom est obligatoire.'; return; }
+    if (!desc)                          { msg.textContent = 'La description est obligatoire.'; return; }
+    if (!prix || parseFloat(prix) <= 0) { msg.textContent = 'Le prix doit être un nombre positif.'; return; }
+    if (!_editorProductId && !_pendingFile) { msg.textContent = 'Veuillez choisir une image pour le nouveau produit.'; return; }
 
-    msg.textContent = 'Enregistrement en cours…';
+    msg.textContent = 'Enregistrement en cours...';
 
-    let imagePath = '';
-    if (_pendingFile) {
-        const upData = await apiPostFile('upload_image', {}, 'image', _pendingFile);
-        if (!upData.ok) { msg.textContent = 'Erreur upload : ' + upData.error; return; }
-        imagePath = upData.path;
+    try {
+        let imagePath = '';
+        if (_pendingFile) {
+            const upData = await apiPostFile('upload_image', {}, 'image', _pendingFile);
+            if (!upData.ok) { msg.textContent = 'Erreur upload : ' + upData.error; return; }
+            imagePath = upData.path;
+        }
+
+        const payload = { nom: name, description: desc, prix, stock, type: _editorCategory };
+        if (imagePath) payload.image = imagePath;
+
+        let data;
+        if (_editorProductId) {
+            payload.id = _editorProductId;
+            data = await apiPost('edit', payload);
+        } else {
+            data = await apiPost('add', payload);
+        }
+
+        if (data.ok) {
+            closeProductEditor();
+            renderProducts(_currentCategory, _currentContainerId);
+        } else {
+            msg.textContent = data.error;
+        }
+    } catch (e) {
+        msg.textContent = 'Erreur de connexion au serveur.';
     }
-
-    const payload = { nom: name, description: desc, prix, stock, type: _editorCategory };
-    if (imagePath) payload.image = imagePath;
-
-    let data;
-    if (_editorProductId) {
-        payload.id = _editorProductId;
-        data = await apiPost('edit', payload);
-    } else {
-        data = await apiPost('add', payload);
-    }
-
-    if (data.ok) { closeProductEditor(); renderProducts(_currentCategory, _currentContainerId); }
-    else msg.textContent = data.error;
 }
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
@@ -368,6 +430,8 @@ function escHtml(s) {
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // FIX : fetchMe ne déclenche plus renderProducts (skipRender=true)
+    // renderProducts est appelé séparément par chaque page via son propre script
     await fetchMe();
     updateCartUI();
 

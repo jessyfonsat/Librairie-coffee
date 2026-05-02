@@ -3,25 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sepia &amp; Moka - Contact</title>
+  <title>Sepia & Moka - Accueil</title>
   <link rel="stylesheet" href="sepiamoka.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <style>
-    .contact-hero { padding:60px 60px 10px; font-size:22px; font-weight:700; text-align:center; }
-    .social-container { display:flex; justify-content:center; gap:20px; padding:30px 20px 20px; flex-wrap:wrap; }
-    .social-card {
-      background:rgba(255,255,255,0.4); padding:22px 30px;
-      border-radius:12px; text-decoration:none; color:var(--green);
-      border:1px solid rgba(47,94,47,0.1);
-      display:flex; flex-direction:column; align-items:center; gap:10px; min-width:120px;
-      transition:all 0.3s cubic-bezier(.4,0,.2,1);
-    }
-    .social-card:hover { background:var(--green); color:#e7e0c9; transform:translateY(-6px); }
-    .social-card i { font-size:28px; }
-    .social-card span { font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1.2px; }
-    .contact-text { padding:10px 60px 50px; font-size:15px; text-align:center; max-width:700px; margin:0 auto; line-height:1.7; }
-    @media(max-width:600px){ .contact-hero,.contact-text{padding-left:20px;padding-right:20px;} }
-  </style>
 </head>
 <body>
   <div id="admin-banner" class="admin-banner" style="display:none;">
@@ -44,35 +27,11 @@
     </div>
   </header>
   <div class="ticker">
-    <span>Retrouvez-nous sur les reseaux    Evenements et actualites    On vous repond avec plaisir   </span>
+    <span>Profitez de nos boissons chaudes et de nos livres !    Nouveautes chaque semaine    Venez nous rendre visite !   </span>
   </div>
-  <div class="contact-hero">
-    Chers lecteurs,<br>
-    RETROUVEZ-NOUS SUR NOS RESEAUX SOCIAUX POUR NE RIEN MANQUER !
-  </div>
-  <div class="social-container">
-    <a href="https://instagram.com" target="_blank" class="social-card">
-      <i class="fa-brands fa-instagram"></i><span>Instagram</span>
-    </a>
-    <a href="https://facebook.com" target="_blank" class="social-card">
-      <i class="fa-brands fa-facebook-f"></i><span>Facebook</span>
-    </a>
-    <a href="https://pinterest.com" target="_blank" class="social-card">
-      <i class="fa-brands fa-pinterest-p"></i><span>Pinterest</span>
-    </a>
-    <a href="https://tiktok.com" target="_blank" class="social-card">
-      <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
-    </a>
-    <a href="mailto:contact@sepiamoka.fr" class="social-card">
-      <i class="fa-solid fa-envelope"></i><span>Email</span>
-    </a>
-    <a href="tel:+33123456789" class="social-card">
-      <i class="fa-solid fa-phone"></i><span>Telephone</span>
-    </a>
-  </div>
-  <p class="contact-text">
-    Cela nous tient a coeur de partager notre passion pour le cafe, les livres et la convivialite avec vous tous. Que vous soyez un amateur de cafe, un passionne de lecture ou simplement a la recherche d'un endroit chaleureux pour vous detendre, nous sommes la pour vous accueillir.
-  </p>
+  <section class="hero">Bienvenue chers lecteurs,<br>CHEZ NOUS ON DEVORE LES LIVRES AUTOUR D'UN BON CAFE !</section>
+  <h3 class="section-title">Parce que nous savons que vous les aimerez :p</h3>
+  <section class="products" id="products-boisson"></section>
   <footer>
     <div class="footer-inner">
       <div class="footer-brand">
@@ -176,5 +135,6 @@
     <button class="btn-checkout" onclick="alert('Fonctionnalite de paiement a venir !')">Commander</button>
   </div>
   <script src="sepiamoka.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => renderProducts('boisson', 'products-boisson'));</script>
 </body>
 </html>

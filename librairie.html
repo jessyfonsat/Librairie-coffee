@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sépia & Moka – Librairie</title>
-  <link rel="stylesheet" href="sepiamoka.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sepia & Moka - Librairie</title>
+  <link rel="stylesheet" href="sepiamoka.css"/>
 </head>
 <body>
-
   <div id="admin-banner" class="admin-banner" style="display:none;">
-    ⚙️ MODE ADMINISTRATEUR — Vous pouvez modifier les livres directement sur cette page
+    ⚙️ MODE ADMINISTRATEUR — Modifiez ou ajoutez des produits directement ici
   </div>
-
   <header>
     <nav>
-      <a href="coffee.html">Accueil</a>
+      <a href="accueil.html">Accueil</a>
+      <a href="boissons.html">Nos Boissons</a>
+      <a href="librairie.html">Librairie</a>
+      <a href="apropos.html">A propos</a>
       <a href="contact.html">Contact</a>
-      <a href="apropos.html">À propos</a>
     </nav>
-    <div class="logo">Sépia &amp; Moka</div>
+    <div class="logo">Sepia &amp; Moka</div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="auth-area"></div>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
@@ -26,108 +26,115 @@
       </button>
     </div>
   </header>
-
   <div class="ticker">
-    <span>Profitez de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveaux titres chaque mois &nbsp;&nbsp;&nbsp;</span>
+    <span>Nouveaux titres chaque mois    Romans, feel-good, fantasy    Livres choisis avec passion   </span>
   </div>
-
-  <section class="hero">
-    Bienvenue chers lecteurs,<br>
-    CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFÉ !
-  </section>
-
-  <h3 class="section-title">Nos histoires à la Wattpad</h3>
-
+  <section class="hero">Bienvenue chers lecteurs,<br>CHEZ NOUS ON DEVORE LES LIVRES AUTOUR D'UN BON CAFE !</section>
+  <h3 class="section-title">Nos histoires a la Wattpad</h3>
   <section class="products" id="products-livre"></section>
-
-  <footer></footer>
-
-<!-- ══ AUTH MODAL ══════════════════════════════════════════════ -->
-<div id="auth-modal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>Sépia & Moka</h2>
-    <div class="modal-tabs">
-      <button class="modal-tab active" data-tab="login"    onclick="switchTab('login')">Connexion</button>
-      <button class="modal-tab"        data-tab="register" onclick="switchTab('register')">Créer un compte</button>
-    </div>
-
-    <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
-      <input id="login-email" type="email"    placeholder="Email"          required autocomplete="email">
-      <input id="login-pass"  type="password" placeholder="Mot de passe"   required autocomplete="current-password">
-      <div id="login-msg" class="modal-msg"></div>
-      <button type="submit">Se connecter</button>
-    </form>
-
-    <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
-      <div style="display:flex;gap:8px;">
-        <input id="reg-prenom" type="text"     placeholder="Prénom" required style="flex:1">
-        <input id="reg-nom"    type="text"     placeholder="Nom"    required style="flex:1">
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Sepia &amp; Moka</span>
+        <p>Cafe-librairie independant</p>
+        <p>Ouvert du mardi au dimanche · 9h–19h</p>
       </div>
-      <input id="reg-email"  type="email"    placeholder="Email"                  required autocomplete="email">
-      <input id="reg-pass"   type="password" placeholder="Mot de passe (6 car. min)" required autocomplete="new-password">
-      <input id="reg-pass2"  type="password" placeholder="Confirmer le mot de passe"  required>
-      <div id="reg-msg" class="modal-msg"></div>
-      <button type="submit">Créer mon compte</button>
-    </form>
-  </div>
-</div>
-
-<!-- ══ PRODUCT EDITOR MODAL ════════════════════════════════════ -->
-<div id="product-editor-modal">
-  <div class="pe-box">
-    <h2 id="pe-title">Modifier le produit <button class="modal-close" onclick="closeProductEditor()">✕</button></h2>
-
-    <div class="pe-field">
-      <label>Image du produit</label>
-      <img id="pe-img-preview" class="pe-img-preview" alt="Aperçu">
-      <label class="pe-img-upload-label">
-        📷 Choisir une image
-        <input type="file" id="pe-img-file" accept="image/*" style="display:none" onchange="handleProductImageChange(this)">
-      </label>
-    </div>
-
-    <div class="pe-field">
-      <label>Nom du produit</label>
-      <input type="text" id="pe-name" placeholder="ex: Cappuccino Vanille">
-    </div>
-
-    <div class="pe-field">
-      <label>Description</label>
-      <textarea id="pe-desc" placeholder="Ingrédients, caractéristiques, auteur…"></textarea>
-    </div>
-
-    <div style="display:flex;gap:12px;">
-      <div class="pe-field" style="flex:1">
-        <label>Prix (€)</label>
-        <input type="number" id="pe-price" placeholder="ex: 4.50" step="0.01" min="0">
+      <div class="footer-links">
+        <strong>Navigation</strong>
+        <a href="accueil.html">Accueil</a>
+        <a href="boissons.html">Nos Boissons</a>
+        <a href="librairie.html">Librairie</a>
+        <a href="apropos.html">A propos</a>
+        <a href="contact.html">Contact</a>
       </div>
-      <div class="pe-field" style="flex:1">
-        <label>Stock</label>
-        <input type="number" id="pe-stock" placeholder="ex: 20" min="0">
+      <div class="footer-links">
+        <strong>Reseaux</strong>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Pinterest</a>
+        <a href="#">TikTok</a>
+      </div>
+      <div class="footer-links">
+        <strong>Nous joindre</strong>
+        <a href="mailto:contact@sepiamoka.fr">contact@sepiamoka.fr</a>
+        <a href="tel:+33123456789">01 23 45 67 89</a>
+        <p>Paris, France</p>
       </div>
     </div>
-
-    <div id="pe-msg" class="pe-msg"></div>
-
-    <div class="pe-actions">
-      <button class="pe-btn-cancel" onclick="closeProductEditor()">Annuler</button>
-      <button class="pe-btn-save"   onclick="saveProductEditor()">💾 Enregistrer</button>
+    <div class="footer-bottom">2026 Sepia &amp; Moka</div>
+  </footer>
+  <div id="auth-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">X</button>
+      <h2>Sepia &amp; Moka</h2>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
+        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Creer un compte</button>
+      </div>
+      <form class="modal-form" data-form="login" onsubmit="handleLogin(event)">
+        <input id="login-email" type="email" placeholder="Email" required autocomplete="email">
+        <input id="login-pass" type="password" placeholder="Mot de passe" required autocomplete="current-password">
+        <div id="login-msg" class="modal-msg"></div>
+        <button type="submit">Se connecter</button>
+      </form>
+      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+        <div style="display:flex;gap:8px;">
+          <input id="reg-prenom" type="text" placeholder="Prenom" required style="flex:1">
+          <input id="reg-nom" type="text" placeholder="Nom" required style="flex:1">
+        </div>
+        <input id="reg-email" type="email" placeholder="Email" required autocomplete="email">
+        <input id="reg-pass" type="password" placeholder="Mot de passe (6 car. min)" required autocomplete="new-password">
+        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <div id="reg-msg" class="modal-msg"></div>
+        <button type="submit">Creer mon compte</button>
+      </form>
     </div>
   </div>
-</div>
 
-<!-- ══ CART PANEL ═══════════════════════════════════════════════ -->
-<div id="cart-panel">
-  <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
-  <div id="cart-list"></div>
-  <div id="cart-total"></div>
-  <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
-</div>
+  <div id="product-editor-modal">
+    <div class="pe-box">
+      <h2 id="pe-title">Modifier le produit <button class="modal-close" onclick="closeProductEditor()">X</button></h2>
+      <div class="pe-field">
+        <label>Image du produit</label>
+        <img id="pe-img-preview" class="pe-img-preview" alt="Apercu">
+        <label for="pe-img-file" class="pe-img-upload-label">
+          Choisir une image
+          <input type="file" id="pe-img-file" accept="image/*" style="display:none" onchange="handleProductImageChange(this)">
+        </label>
+      </div>
+      <div class="pe-field">
+        <label>Nom du produit</label>
+        <input type="text" id="pe-name" placeholder="Nom du produit">
+      </div>
+      <div class="pe-field">
+        <label>Description</label>
+        <textarea id="pe-desc" placeholder="Description, ingredients, auteur..."></textarea>
+      </div>
+      <div style="display:flex;gap:12px;">
+        <div class="pe-field" style="flex:1">
+          <label>Prix (euro)</label>
+          <input type="number" id="pe-price" placeholder="ex: 4.50" step="0.01" min="0">
+        </div>
+        <div class="pe-field" style="flex:1">
+          <label>Stock</label>
+          <input type="number" id="pe-stock" placeholder="ex: 20" min="0">
+        </div>
+      </div>
+      <div id="pe-msg" class="pe-msg"></div>
+      <div class="pe-actions">
+        <button class="pe-btn-cancel" onclick="closeProductEditor()">Annuler</button>
+        <button class="pe-btn-save" onclick="saveProductEditor()">Enregistrer</button>
+      </div>
+    </div>
+  </div>
 
+  <div id="cart-panel">
+    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">X</button></h2>
+    <div id="cart-list"></div>
+    <div id="cart-total"></div>
+    <button class="btn-checkout" onclick="alert('Fonctionnalite de paiement a venir !')">Commander</button>
+  </div>
   <script src="sepiamoka.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => renderProducts('livre', 'products-livre'));
-  </script>
+  <script>document.addEventListener('DOMContentLoaded', () => renderProducts('livre', 'products-livre'));</script>
 </body>
 </html>

@@ -2,8 +2,6 @@
 /**
  * api_produits.php
  * API JSON pour la gestion des produits Sépia & Moka
- * Actions : list, get, add, edit, delete, upload_image
- * Auth    : login, register, logout, me
  */
 
 session_start();
@@ -43,9 +41,28 @@ if ($action === 'login') {
     $stmt->execute([$email]);
     $client = $stmt->fetch();
 
-    if (!$client || !password_verify($pass, $client['mot_de_passe'] ?? '')) {
+    if (!$client) {
         jsonErr('Email ou mot de passe incorrect.');
     }
+
+    // Vérifie le mot de passe — supporte password_hash ET mot de passe en clair (migration)
+    $mdp = $client['mot_de_passe'] ?? '';
+    $ok  = false;
+
+    if (strlen($mdp) > 0 && $mdp[0] === '$') {
+        // Hash bcrypt
+        $ok = password_verify($pass, $mdp);
+    } else {
+        // Mot de passe en clair (ancien compte)
+        $ok = ($pass === $mdp);
+        // On en profite pour hasher maintenant
+        if ($ok) {
+            $hash = password_hash($pass, PASSWORD_DEFAULT);
+            $pdo->prepare("UPDATE client SET mot_de_passe=? WHERE _Id_client=?")->execute([$hash, $client['_Id_client']]);
+        }
+    }
+
+    if (!$ok) jsonErr('Email ou mot de passe incorrect.');
 
     $_SESSION['user'] = [
         'id'    => $client['_Id_client'],
@@ -155,11 +172,11 @@ if ($action === 'edit') {
     if (!$id || !$nom || !$description || !$prix || !$type) jsonErr('Champs obligatoires manquants.');
 
     global $pdo;
-    $sets = "Nom_produit=?, description_produit=?, prix_produit=?, type_produit=?, stock_produit=?";
+    $sets   = "Nom_produit=?, description_produit=?, prix_produit=?, type_produit=?, stock_produit=?";
     $params = [$nom, $description, $prix, $type, $stock];
 
     if ($image) {
-        $sets .= ", image_produit=?";
+        $sets    .= ", image_produit=?";
         $params[] = $image;
     }
     $params[] = $id;
@@ -186,13 +203,13 @@ if ($action === 'upload_image') {
     }
 
     $file     = $_FILES['image'];
-    $maxSize  = 5 * 1024 * 1024; // 5 Mo
+    $maxSize  = 5 * 1024 * 1024;
     $allowed  = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
     $finfo    = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->file($file['tmp_name']);
 
-    if ($file['size'] > $maxSize)         jsonErr('Image trop lourde (max 5 Mo).');
-    if (!in_array($mimeType, $allowed))   jsonErr('Format non autorisé (jpg, png, webp, gif).');
+    if ($file['size'] > $maxSize)       jsonErr('Image trop lourde (max 5 Mo).');
+    if (!in_array($mimeType, $allowed)) jsonErr('Format non autorisé (jpg, png, webp, gif).');
 
     $ext      = pathinfo($file['name'], PATHINFO_EXTENSION);
     $filename = generateId('img_') . '.' . strtolower($ext);
