@@ -263,19 +263,15 @@ async function renderProducts(category, containerId) {
         const imgSrc = p.image_produit || '';
         return `
         <div class="product" data-id="${escHtml(p.id_produit)}">
-          <div class="product-tooltip">
-            <strong>${escHtml(p.Nom_produit)}</strong><br>
-            ${escHtml(p.description_produit)}<br>
-            ${p.stock_produit > 0 ? `📦 Stock : ${p.stock_produit}` : '<span style="color:#ff8a80">Rupture de stock</span>'}<br>
-            ⭐ ${parseFloat(p.prix_produit).toFixed(2)}€
-          </div>
           <img src="${escHtml(imgSrc)}" alt="${escHtml(p.Nom_produit)}" width="200" height="220"
-               style="object-fit:cover;border-radius:8px;"
+               style="object-fit:cover;border-radius:8px;display:block;"
                onerror="this.style.background='#ddd';this.removeAttribute('src')">
           <div style="margin-top:6px;">${escHtml(p.Nom_produit)}<br>${parseFloat(p.prix_produit).toFixed(2)}€</div>
           <button class="btn-add-cart"
-            ${p.stock_produit <= 0 ? 'disabled style="opacity:.4;cursor:not-allowed"' : ''}
-            onclick="addToCart({id:${JSON.stringify(p.id_produit)},name:${JSON.stringify(p.Nom_produit)},price:${parseFloat(p.prix_produit)}})">
+            data-id="${escHtml(p.id_produit)}"
+            data-name="${escHtml(p.Nom_produit)}"
+            data-price="${parseFloat(p.prix_produit)}"
+            ${p.stock_produit <= 0 ? 'disabled style="opacity:.4;cursor:not-allowed"' : ''}>
             ${p.stock_produit > 0 ? '+ Panier' : 'Indisponible'}
           </button>
           ${admin ? `
@@ -295,6 +291,17 @@ async function renderProducts(category, containerId) {
         </div>` : '';
 
     container.innerHTML = cards + addBtn;
+
+    // Event delegation — no inline onclick needed
+    container.querySelectorAll('.btn-add-cart').forEach(btn => {
+        btn.addEventListener('click', function() {
+            addToCart({
+                id:    this.dataset.id,
+                name:  this.dataset.name,
+                price: parseFloat(this.dataset.price)
+            });
+        });
+    });
 }
 
 async function confirmDeleteProduct(id) {

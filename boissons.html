@@ -5,20 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sepia & Moka - Nos Boissons</title>
   <link rel="stylesheet" href="sepiamoka.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .hero {
+      padding: 80px 60px 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 15px;
+      margin-bottom: 30px;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
   <div id="admin-banner" class="admin-banner" style="display:none;">
     ⚙️ MODE ADMINISTRATEUR — Modifiez ou ajoutez des produits directement ici
   </div>
+
   <header>
     <nav>
       <a href="accueil.html">Accueil</a>
       <a href="boissons.html">Nos Boissons</a>
       <a href="librairie.html">Librairie</a>
-      <a href="apropos.html">A propos</a>
+      <a href="apropos.html">À propos</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="logo">Sepia &amp; Moka</div>
+    <div class="logo">
+      <img src="chien.png" alt="" class="logo-chien">
+      <span>Sépia &amp; Moka</span>
+    </div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="auth-area"></div>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
@@ -26,10 +50,10 @@
       </button>
     </div>
   </header>
-  <div class="ticker">
-    <span>Profitez de nos boissons chaudes et froides !    Preparees avec soin    Nouveautes chaque semaine   </span>
-  </div>
-  <section class="hero">Bienvenue chers lecteurs,<br>CHEZ NOUS ON DEVORE LES LIVRES AUTOUR D'UN BON CAFE !</section>
+  <div class="ticker"><div class="ticker-track"><span>Profitez de nos boissons chaudes et froides &nbsp;·&nbsp; Préparées avec soin &nbsp;·&nbsp; Nouveautés chaque semaine &nbsp;·&nbsp; Venez nous goûter &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Profitez de nos boissons chaudes et froides &nbsp;·&nbsp; Préparées avec soin &nbsp;·&nbsp; Nouveautés chaque semaine &nbsp;·&nbsp; Venez nous goûter &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Profitez de nos boissons chaudes et froides &nbsp;·&nbsp; Préparées avec soin &nbsp;·&nbsp; Nouveautés chaque semaine &nbsp;·&nbsp; Venez nous goûter &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Profitez de nos boissons chaudes et froides &nbsp;·&nbsp; Préparées avec soin &nbsp;·&nbsp; Nouveautés chaque semaine &nbsp;·&nbsp; Venez nous goûter &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span></div></div></div>
+  <section class="hero">Bienvenue chers lecteurs,<br>
+    CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFÉ !
+  </section>
   <h3 class="section-title">Parce que nous savons que vous les aimerez :p</h3>
   <section class="products" id="products-boisson"></section>
   <footer>

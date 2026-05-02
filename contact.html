@@ -22,20 +22,44 @@
     .contact-text { padding:10px 60px 50px; font-size:15px; text-align:center; max-width:700px; margin:0 auto; line-height:1.7; }
     @media(max-width:600px){ .contact-hero,.contact-text{padding-left:20px;padding-right:20px;} }
   </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .hero {
+      padding: 80px 60px 20px;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .section-title {
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 15px;
+      margin-bottom: 30px;
+      margin-top: 50px;
+    }
+  </style>
 </head>
 <body>
   <div id="admin-banner" class="admin-banner" style="display:none;">
     ⚙️ MODE ADMINISTRATEUR — Modifiez ou ajoutez des produits directement ici
   </div>
+
   <header>
     <nav>
       <a href="accueil.html">Accueil</a>
       <a href="boissons.html">Nos Boissons</a>
       <a href="librairie.html">Librairie</a>
-      <a href="apropos.html">A propos</a>
+      <a href="apropos.html">À propos</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="logo">Sepia &amp; Moka</div>
+    <div class="logo">
+      <img src="chien.png" alt="" class="logo-chien">
+      <span>Sépia &amp; Moka</span>
+    </div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="auth-area"></div>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
@@ -43,9 +67,7 @@
       </button>
     </div>
   </header>
-  <div class="ticker">
-    <span>Retrouvez-nous sur les reseaux    Evenements et actualites    On vous repond avec plaisir   </span>
-  </div>
+  <div class="ticker"><div class="ticker-track"><span>Retrouvez-nous sur les réseaux &nbsp;·&nbsp; Événements &amp; actualités &nbsp;·&nbsp; On vous répond avec plaisir &nbsp;·&nbsp; À bientôt &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Retrouvez-nous sur les réseaux &nbsp;·&nbsp; Événements &amp; actualités &nbsp;·&nbsp; On vous répond avec plaisir &nbsp;·&nbsp; À bientôt &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Retrouvez-nous sur les réseaux &nbsp;·&nbsp; Événements &amp; actualités &nbsp;·&nbsp; On vous répond avec plaisir &nbsp;·&nbsp; À bientôt &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span><span>Retrouvez-nous sur les réseaux &nbsp;·&nbsp; Événements &amp; actualités &nbsp;·&nbsp; On vous répond avec plaisir &nbsp;·&nbsp; À bientôt &nbsp;·&nbsp; &nbsp;&nbsp;&nbsp;</span></div></div></div>
   <div class="contact-hero">
     Chers lecteurs,<br>
     RETROUVEZ-NOUS SUR NOS RESEAUX SOCIAUX POUR NE RIEN MANQUER !
