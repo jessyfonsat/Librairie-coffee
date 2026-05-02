@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sépia & Moka - Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #e7e0c9;
+      color: #2f5e2f;
+      line-height: 1.6;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    nav a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #2f5e2f;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .hero {
+      padding: 60px 60px 20px;
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .text-content {
+      padding: 20px 60px 60px;
+      font-size: 18px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .social-container {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px 20px 40px;
+      flex-wrap: wrap;
+    }
+
+    .social-card {
+      background: rgba(255, 255, 255, 0.4);
+      padding: 25px 35px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #2f5e2f;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid rgba(47, 94, 47, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 140px;
+    }
+
+    
+    .social-card:hover {
+      background: #2f5e2f;
+      color: #e7e0c9;
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .social-icon {
+      font-size: 32px; /* Taille du logo */
+      margin-bottom: 12px;
+    }
+
+    .social-name {
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    @media (max-width: 768px) {
+      .hero { font-size: 20px; padding: 40px 20px; }
+      .text-content { font-size: 16px; padding: 20px; }
+      header { padding: 15px 20px; }
+      .social-container { gap: 15px; }
+      .social-card { min-width: 120px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="coffee.html">coffee</a>
+      <a href="Librairie.html">Librairie</a>
+      <a href="A-propos.html">À propos</a>
+      
+    </nav>
+    <div class="logo">Sépia & Moka</div>
+    <div>🛒</div>
+  </header>
+
+  <section class="hero">
+    Chers lecteurs,<br>
+    Retrouvez-nous sur nos réseaux sociaux pour ne rien manquer de nos événements !
+  </section>
+
+  <div class="social-container">
+    <a href="https://instagram.com" target="_blank" class="social-card">
+      <i class="fa-brands fa-instagram social-icon"></i>
+      <span class="social-name">Instagram</span>
+    </a>
+    
+    <a href="https://facebook.com" target="_blank" class="social-card">
+      <i class="fa-brands fa-facebook-f social-icon"></i>
+      <span class="social-name">Facebook</span>
+    </a>
+    
+    <a href="https://pinterest.com" target="_blank" class="social-card">
+      <i class="fa-brands fa-pinterest-p social-icon"></i>
+      <span class="social-name">Pinterest</span>
+    </a>
+    
+    <a href="https://tiktok.com" target="_blank" class="social-card">
+      <i class="fa-brands fa-tiktok social-icon"></i>
+      <span class="social-name">TikTok</span>
+    </a>
+  </div>
+
+  <section class="text-content">
+    Cela nous tient à cœur de partager notre passion pour le café, les livres et la convivialité avec vous tous. Que vous soyez un amateur de café, un passionné de lecture ou simplement à la recherche d'un endroit chaleureux pour vous détendre, nous sommes là pour vous accueillir et partager de bons moments ensemble.
+  </section>
+ 
+  <br>
+
+<section class="text-content">
+    vous pouvez également nous contacter directement par email ou par telephone en cas de problème ou de question concernant nos produits ou nos services. Nous sommes toujours heureux de recevoir vos commentaires et suggestions pour améliorer votre expérience chez Sépia & Moka.
+  </section>
+  
+  <br>
+  <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+
+  <a href="https://gmail.com" target="_blank" class="social-card" style="text-decoration: none;">
+    <i class="fa-solid fa-envelope social-icon"></i>
+    <span class="social-name">Email</span>
+  </a> 
+
+  <a href="tel:+1234567890" class="social-card" style="text-decoration: none;">
+    <i class="fa-solid fa-phone social-icon"></i>
+    <span class="social-name">Téléphone</span>
+  </a>
+
+</div>
+</html>

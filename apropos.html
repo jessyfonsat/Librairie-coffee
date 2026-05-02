@@ -3,234 +3,135 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Library Cafe</title>
-  
+  <title>Sépia & Moka – À propos</title>
+  <link rel="stylesheet" href="sepiamoka.css" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #e7e0c9;
-      color: #2f5e2f;
-    }
-
-    header {
+    .about-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      background: rgba(255,255,255,0.3);
+      align-items: flex-start;
+      gap: 50px;
+      padding: 60px;
     }
-
-    nav a {
-      margin-right: 20px;
-      text-decoration: none;
-      color: #2f5e2f;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .logo {
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    .ticker {
-      white-space: nowrap;
-      overflow: hidden;
-      border-top: 1px solid rgba(0,0,0,0.1);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-      padding: 6px 0;
-      font-size: 12px;
-    }
-
-    .ticker span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll 18s linear infinite;
-    }
-
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-100%); }
-    }
-
-    .hero {
-      padding: 80px 60px 40px;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1.4;
-    }
-
-    .lines {
-      padding: 20px 60px;
-    }
-
-    .line {
-      height: 6px;
-      background: #bdbdbd;
+    .about-image img {
+      width: 250px;
+      height: 250px;
       border-radius: 10px;
-      margin: 30px 0;
-      opacity: 0.6;
+      object-fit: cover;
     }
-
-    .section-title {
-      text-align: center;
-      margin-top: 60px;
-      font-weight: 700;
-      letter-spacing: 1px;
+    .about-text { max-width: 600px; }
+    .about-text h1 { margin-bottom: 20px; font-family: 'Playfair Display', serif; }
+    .about-text h2 { margin: 20px 0 10px; font-family: 'Playfair Display', serif; font-size: 18px; }
+    .about-text p { line-height: 1.7; margin-bottom: 14px; font-size: 15px; }
+    .about-title { padding: 40px 60px 0; font-family: 'Playfair Display', serif; font-size: 36px; }
+    .highlight-box {
+      background: rgba(47,94,47,0.1);
+      border-left: 4px solid var(--green);
+      padding: 14px 18px;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      margin-top: 10px;
     }
-
-    .products {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      padding: 40px;
-      flex-wrap: wrap;
-    }
-
-    .product {
-      text-align: center;
-      font-size: 12px;
-    }
-
-    .bottle {
-      width: 60px;
-      height: 90px;
-      background: linear-gradient(#eee, #cfcfcf);
-      border-radius: 10px;
-      margin: 0 auto 10px;
-      box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
-    }
-
-    footer {
-      height: 80px;
-    }
-
     @media (max-width: 768px) {
-      .hero { font-size: 22px; padding: 60px 30px; }
-      header { padding: 15px 20px; }
-      .lines { padding: 20px 30px; }
-
+      .about-container { flex-direction: column; padding: 30px; }
+      .about-title { padding: 30px 30px 0; font-size: 26px; }
     }
-
-    body{
-font-family:'Montserrat',sans-serif;
-background:#e7e0c9;
-color:#2f5e2f;
-}
-
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 40px;
-background:rgba(255,255,255,0.3);
-}
-
-nav a{
-margin-right:20px;
-text-decoration:none;
-color:#2f5e2f;
-font-weight:600;
-font-size:14px;
-}
-
-.about-container{
-display:flex;
-align-items:center;
-gap:50px;
-padding:60px;
-}
-
-.about-image img{
-width: 250px;
-height: 250px;
-border-radius:10px;
-}
-
-.about-text{
-max-width:600px;
-}
-
-.about-text h1{
-margin-bottom:20px;
-}
-
-.about-text p{
-line-height:1.6;
-margin-bottom:15px;
-}
-
-.about-title{
-padding:20px 60px 0;
-font-size:36px;
-}
   </style>
 </head>
 <body>
 
   <header>
     <nav>
-      <a href="#">Accueil</a>
-      <a href="#">Menu</a>
-      <a href="#">Librairie</a>
-      <a href="#">À propos</a>
+      <a href="coffee.html">Coffee</a>
+      <a href="librairie.html">Librairie</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div class="logo">Sépia & Moka</div>
-    <div>🛒</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="auth-area"></div>
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        🛒<span class="cart-count"></span>
+      </button>
+    </div>
   </header>
 
-  
-<br>
-<h1 class="about-title">À propos de Sépia & Moka</h1>
+  <br>
+  <h1 class="about-title">À propos de Sépia & Moka</h1>
 
-<section class="about-container">
-
-  <div class="about-image">
-    <img src="Cozy Book Café Corner _ Warm Lights, Coffee & Stacks of Books _ Vision Board _ Cozy Living.jpg" alt="Café librairie">
-  </div>
-
+  <section class="about-container">
+    <div class="about-image">
+      <img src="Cozy Book Café Corner _ Warm Lights, Coffee & Stacks of Books _ Vision Board _ Cozy Living.jpg" alt="Café librairie">
+    </div>
     <div class="about-text">
       <p>
-        Sépia & Moka est né d’une idée simple : réunir deux plaisirs
+        Sépia & Moka est né d'une idée simple : réunir deux plaisirs
         intemporels, la lecture et le café.
       </p>
-
       <p>
         Dans un monde où tout va vite, nous avons voulu créer un espace
-        où l’on peut ralentir, prendre le temps de feuilleter un livre,
-        travailler tranquillement ou discuter autour d’une boisson chaude.
+        où l'on peut ralentir, prendre le temps de feuilleter un livre,
+        travailler tranquillement ou discuter autour d'une boisson chaude.
       </p>
-
       <p>
         Notre café-librairie propose une sélection de livres inspirants
         et des boissons préparées avec soin pour offrir un moment
         de détente et de découverte.
       </p>
-
       <h2>Notre concept</h2>
-
       <p>
         Chez Sépia & Moka, chaque détail est pensé pour créer
         une ambiance chaleureuse et conviviale.
       </p>
-
       <p>
         Vous pouvez venir lire, travailler sur votre ordinateur,
-        rencontrer des amis ou simplement profiter de l’atmosphère
+        rencontrer des amis ou simplement profiter de l'atmosphère
         calme et inspirante de notre café.
       </p>
-
       <p>
-        Entre l’odeur du café fraîchement moulu et les étagères
+        Entre l'odeur du café fraîchement moulu et les étagères
         remplies de livres, chaque visite devient un moment unique.
       </p>
-
       <div class="highlight-box">
         Un lieu pensé pour les amoureux des livres, du calme et des bonnes boissons.
       </div>
     </div>
+  </section>
 
-</section>
+  <footer></footer>
 
+  <!-- AUTH MODAL -->
+  <div id="auth-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2>Sépia & Moka</h2>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
+        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+      </div>
+      <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
+        <input id="login-email" type="email" placeholder="Email" required>
+        <input id="login-pass" type="password" placeholder="Mot de passe" required>
+        <div id="login-msg" class="modal-msg"></div>
+        <button type="submit">Se connecter</button>
+      </form>
+      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+        <input id="reg-name" type="text" placeholder="Prénom & Nom" required>
+        <input id="reg-email" type="email" placeholder="Email" required>
+        <input id="reg-pass" type="password" placeholder="Mot de passe" required>
+        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <div id="reg-msg" class="modal-msg"></div>
+        <button type="submit">Créer mon compte</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART PANEL -->
+  <div id="cart-panel">
+    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
+    <div id="cart-list"></div>
+    <div id="cart-total"></div>
+    <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
+  </div>
+
+  <script src="sepiamoka.js"></script>
+</body>
+</html>
