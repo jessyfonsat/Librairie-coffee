@@ -6,46 +6,25 @@
   <title>Sépia & Moka – À propos</title>
   <link rel="stylesheet" href="sepiamoka.css" />
   <style>
-    .about-container {
-      display: flex;
-      align-items: flex-start;
-      gap: 50px;
-      padding: 60px;
-    }
-    .about-image img {
-      width: 250px;
-      height: 250px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
-    .about-text { max-width: 600px; }
-    .about-text h1 { margin-bottom: 20px; font-family: 'Playfair Display', serif; }
-    .about-text h2 { margin: 20px 0 10px; font-family: 'Playfair Display', serif; font-size: 18px; }
-    .about-text p { line-height: 1.7; margin-bottom: 14px; font-size: 15px; }
-    .about-title { padding: 40px 60px 0; font-family: 'Playfair Display', serif; font-size: 36px; }
-    .highlight-box {
-      background: rgba(47,94,47,0.1);
-      border-left: 4px solid var(--green);
-      padding: 14px 18px;
-      border-radius: 0 8px 8px 0;
-      font-style: italic;
-      margin-top: 10px;
-    }
-    @media (max-width: 768px) {
-      .about-container { flex-direction: column; padding: 30px; }
-      .about-title { padding: 30px 30px 0; font-size: 26px; }
-    }
+    .about-container { display:flex; align-items:flex-start; gap:50px; padding:60px; }
+    .about-image img { width:250px; height:250px; border-radius:10px; object-fit:cover; }
+    .about-text { max-width:600px; }
+    .about-text h2 { margin:20px 0 10px; font-family:'Playfair Display',serif; font-size:18px; }
+    .about-text p  { line-height:1.7; margin-bottom:14px; font-size:15px; }
+    .about-title   { padding:40px 60px 0; font-family:'Playfair Display',serif; font-size:36px; }
+    .highlight-box { background:rgba(47,94,47,.1); border-left:4px solid var(--green); padding:14px 18px; border-radius:0 8px 8px 0; font-style:italic; margin-top:10px; }
+    @media(max-width:768px){ .about-container{flex-direction:column;padding:30px;} .about-title{padding:30px 30px 0;font-size:26px;} }
   </style>
 </head>
 <body>
 
   <header>
     <nav>
-      <a href="coffee.html">Coffee</a>
+      <a href="coffee.html">Accueil</a>
       <a href="librairie.html">Librairie</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <div class="logo">Sépia & Moka</div>
+    <div class="logo">Sépia &amp; Moka</div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="auth-area"></div>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
@@ -55,82 +34,108 @@
   </header>
 
   <br>
-  <h1 class="about-title">À propos de Sépia & Moka</h1>
+  <h1 class="about-title">À propos de Sépia &amp; Moka</h1>
 
   <section class="about-container">
     <div class="about-image">
-      <img src="img/Cozy Book Café Corner _ Warm Lights, Coffee & Stacks of Books _ Vision Board _ Cozy Living.jpg" alt="Café librairie">
+      <img src="Cozy Book Café Corner _ Warm Lights, Coffee & Stacks of Books _ Vision Board _ Cozy Living.jpg" alt="Café librairie">
     </div>
     <div class="about-text">
-      <p>
-        Sépia & Moka est né d'une idée simple : réunir deux plaisirs
-        intemporels, la lecture et le café.
-      </p>
-      <p>
-        Dans un monde où tout va vite, nous avons voulu créer un espace
-        où l'on peut ralentir, prendre le temps de feuilleter un livre,
-        travailler tranquillement ou discuter autour d'une boisson chaude.
-      </p>
-      <p>
-        Notre café-librairie propose une sélection de livres inspirants
-        et des boissons préparées avec soin pour offrir un moment
-        de détente et de découverte.
-      </p>
+      <p>Sépia &amp; Moka est né d'une idée simple : réunir deux plaisirs intemporels, la lecture et le café.</p>
+      <p>Dans un monde où tout va vite, nous avons voulu créer un espace où l'on peut ralentir, prendre le temps de feuilleter un livre, travailler tranquillement ou discuter autour d'une boisson chaude.</p>
+      <p>Notre café-librairie propose une sélection de livres inspirants et des boissons préparées avec soin pour offrir un moment de détente et de découverte.</p>
       <h2>Notre concept</h2>
-      <p>
-        Chez Sépia & Moka, chaque détail est pensé pour créer
-        une ambiance chaleureuse et conviviale.
-      </p>
-      <p>
-        Vous pouvez venir lire, travailler sur votre ordinateur,
-        rencontrer des amis ou simplement profiter de l'atmosphère
-        calme et inspirante de notre café.
-      </p>
-      <p>
-        Entre l'odeur du café fraîchement moulu et les étagères
-        remplies de livres, chaque visite devient un moment unique.
-      </p>
-      <div class="highlight-box">
-        Un lieu pensé pour les amoureux des livres, du calme et des bonnes boissons.
-      </div>
+      <p>Chez Sépia &amp; Moka, chaque détail est pensé pour créer une ambiance chaleureuse et conviviale.</p>
+      <p>Vous pouvez venir lire, travailler sur votre ordinateur, rencontrer des amis ou simplement profiter de l'atmosphère calme et inspirante de notre café.</p>
+      <p>Entre l'odeur du café fraîchement moulu et les étagères remplies de livres, chaque visite devient un moment unique.</p>
+      <div class="highlight-box">Un lieu pensé pour les amoureux des livres, du calme et des bonnes boissons.</div>
     </div>
   </section>
 
   <footer></footer>
 
-  <!-- AUTH MODAL -->
-  <div id="auth-modal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <h2>Sépia & Moka</h2>
-      <div class="modal-tabs">
-        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
-        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+<!-- ══ AUTH MODAL ══════════════════════════════════════════════ -->
+<div id="auth-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Sépia & Moka</h2>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="login"    onclick="switchTab('login')">Connexion</button>
+      <button class="modal-tab"        data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+    </div>
+
+    <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
+      <input id="login-email" type="email"    placeholder="Email"          required autocomplete="email">
+      <input id="login-pass"  type="password" placeholder="Mot de passe"   required autocomplete="current-password">
+      <div id="login-msg" class="modal-msg"></div>
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+      <div style="display:flex;gap:8px;">
+        <input id="reg-prenom" type="text"     placeholder="Prénom" required style="flex:1">
+        <input id="reg-nom"    type="text"     placeholder="Nom"    required style="flex:1">
       </div>
-      <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
-        <input id="login-email" type="email" placeholder="Email" required>
-        <input id="login-pass" type="password" placeholder="Mot de passe" required>
-        <div id="login-msg" class="modal-msg"></div>
-        <button type="submit">Se connecter</button>
-      </form>
-      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
-        <input id="reg-name" type="text" placeholder="Prénom & Nom" required>
-        <input id="reg-email" type="email" placeholder="Email" required>
-        <input id="reg-pass" type="password" placeholder="Mot de passe" required>
-        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
-        <div id="reg-msg" class="modal-msg"></div>
-        <button type="submit">Créer mon compte</button>
-      </form>
+      <input id="reg-email"  type="email"    placeholder="Email"                  required autocomplete="email">
+      <input id="reg-pass"   type="password" placeholder="Mot de passe (6 car. min)" required autocomplete="new-password">
+      <input id="reg-pass2"  type="password" placeholder="Confirmer le mot de passe"  required>
+      <div id="reg-msg" class="modal-msg"></div>
+      <button type="submit">Créer mon compte</button>
+    </form>
+  </div>
+</div>
+
+<!-- ══ PRODUCT EDITOR MODAL ════════════════════════════════════ -->
+<div id="product-editor-modal">
+  <div class="pe-box">
+    <h2 id="pe-title">Modifier le produit <button class="modal-close" onclick="closeProductEditor()">✕</button></h2>
+
+    <div class="pe-field">
+      <label>Image du produit</label>
+      <img id="pe-img-preview" class="pe-img-preview" alt="Aperçu">
+      <label class="pe-img-upload-label">
+        📷 Choisir une image
+        <input type="file" id="pe-img-file" accept="image/*" style="display:none" onchange="handleProductImageChange(this)">
+      </label>
+    </div>
+
+    <div class="pe-field">
+      <label>Nom du produit</label>
+      <input type="text" id="pe-name" placeholder="ex: Cappuccino Vanille">
+    </div>
+
+    <div class="pe-field">
+      <label>Description</label>
+      <textarea id="pe-desc" placeholder="Ingrédients, caractéristiques, auteur…"></textarea>
+    </div>
+
+    <div style="display:flex;gap:12px;">
+      <div class="pe-field" style="flex:1">
+        <label>Prix (€)</label>
+        <input type="number" id="pe-price" placeholder="ex: 4.50" step="0.01" min="0">
+      </div>
+      <div class="pe-field" style="flex:1">
+        <label>Stock</label>
+        <input type="number" id="pe-stock" placeholder="ex: 20" min="0">
+      </div>
+    </div>
+
+    <div id="pe-msg" class="pe-msg"></div>
+
+    <div class="pe-actions">
+      <button class="pe-btn-cancel" onclick="closeProductEditor()">Annuler</button>
+      <button class="pe-btn-save"   onclick="saveProductEditor()">💾 Enregistrer</button>
     </div>
   </div>
+</div>
 
-  <!-- CART PANEL -->
-  <div id="cart-panel">
-    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
-    <div id="cart-list"></div>
-    <div id="cart-total"></div>
-    <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
-  </div>
+<!-- ══ CART PANEL ═══════════════════════════════════════════════ -->
+<div id="cart-panel">
+  <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
+  <div id="cart-list"></div>
+  <div id="cart-total"></div>
+  <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
+</div>
 
   <script src="sepiamoka.js"></script>
 </body>

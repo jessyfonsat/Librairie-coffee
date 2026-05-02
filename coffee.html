@@ -8,13 +8,17 @@
 </head>
 <body>
 
+  <div id="admin-banner" class="admin-banner" style="display:none;">
+    ⚙️ MODE ADMINISTRATEUR — Vous pouvez modifier les boissons directement sur cette page
+  </div>
+
   <header>
     <nav>
       <a href="contact.html">Contact</a>
       <a href="librairie.html">Librairie</a>
       <a href="apropos.html">À propos</a>
     </nav>
-    <div class="logo">Sépia & Moka</div>
+    <div class="logo">Sépia &amp; Moka</div>
     <div style="display:flex;align-items:center;gap:12px;">
       <div class="auth-area"></div>
       <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
@@ -24,7 +28,7 @@
   </header>
 
   <div class="ticker">
-    <span>Profiter de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveautés chaque semaine &nbsp;&nbsp;&nbsp; Venez nous rendre visite !</span>
+    <span>Profitez de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveautés chaque semaine &nbsp;&nbsp;&nbsp; Venez nous rendre visite !</span>
   </div>
 
   <section class="hero">
@@ -34,126 +38,96 @@
 
   <h3 class="section-title">Parce que nous savons que vous les aimerez :p</h3>
 
-  <section class="products">
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Matcha Latte</strong><br>
-        Thé matcha japonais, lait végétal moussé.<br>
-        ☕ Douceur végétale<br>
-        🌿 Sans caféine forte<br>
-        ⭐ 7€
-      </div>
-      <img src="img/103507218.jpg" alt="Macha" width="200" height="220">
-      <div>Matcha<br>7€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-matcha',name:'Matcha Latte',price:7})">+ Panier</button>
-    </div>
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Moka</strong><br>
-        Espresso double, chocolat, lait crémeux.<br>
-        ☕ Intense & gourmand<br>
-        🍫 Notes chocolatées<br>
-        ⭐ 5€
-      </div>
-      <img src="img/63d1e7f3-be97-494b-bc2e-2c5fc7e9b99d_bSPeBjy.jpg" alt="Moka" width="200" height="220">
-      <div>Moka<br>5€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-moka',name:'Moka',price:5})">+ Panier</button>
-    </div>
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Chai Latte</strong><br>
-        Mélange d'épices (cannelle, cardamome, gingembre) & lait chaud.<br>
-        🌶 Épicé & réconfortant<br>
-        🍵 Origine Inde<br>
-        ⭐ 5€
-      </div>
-      <img src="img/Chai.jpg" alt="Chai" width="200" height="220">
-      <div>Chai<br>5€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-chai',name:'Chai Latte',price:5})">+ Panier</button>
-    </div>
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Café</strong><br>
-        Espresso simple, grains sélectionnés.<br>
-        ☕ Classique & fort<br>
-        ⚡ Réveil assuré<br>
-        ⭐ 3€
-      </div>
-      <img src="img/1055859-fu-patisserie-et-coffee-shop-paris-13e-cafe-latte.jpg" alt="Café" width="200" height="220">
-      <div>Café<br>3€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-cafe',name:'Café',price:3})">+ Panier</button>
-    </div>
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Latte</strong><br>
-        Espresso allongé, lait texturé, mousse douce.<br>
-        ☕ Doux & crémeux<br>
-        🥛 Lait entier ou végétal<br>
-        ⭐ 4,50€
-      </div>
-      <img src="img/site-malongo-5-1024x614.jpg" alt="Latte" width="200" height="220">
-      <div>Latte<br>4,50€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-latte',name:'Latte',price:4.5})">+ Panier</button>
-    </div>
-
-    <div class="product">
-      <div class="product-tooltip">
-        <strong>Thé glacé à l'orange</strong><br>
-        Thé vert infusé à froid, jus d'orange pressé, menthe.<br>
-        🍊 Frais & vitaminé<br>
-        🧊 Servi avec glaçons<br>
-        ⭐ 4,50€
-      </div>
-      <img src="img/iced-coffee-drink-menu-orange-americano-fusion-with-fresh-orange-fruit-mixed-in-a-plastic-cup-drink-menu-product-free-photo.jpg" alt="Thé glacé à l'orange" width="200" height="220">
-      <div>Thé glacé à l'orange<br>4,50€</div>
-      <button class="btn-add-cart" onclick="addToCart({id:'boisson-the-glace',name:'Thé glacé à l\'orange',price:4.5})">+ Panier</button>
-    </div>
-
-  </section>
+  <section class="products" id="products-boisson"></section>
 
   <footer></footer>
 
-  <!-- AUTH MODAL -->
-  <div id="auth-modal">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <h2>Sépia & Moka</h2>
-      <div class="modal-tabs">
-        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
-        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+<!-- ══ AUTH MODAL ══════════════════════════════════════════════ -->
+<div id="auth-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>Sépia & Moka</h2>
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="login"    onclick="switchTab('login')">Connexion</button>
+      <button class="modal-tab"        data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+    </div>
+
+    <form class="modal-form" data-form="login" onsubmit="handleLogin(event)">
+      <input id="login-email" type="email"    placeholder="Email"          required autocomplete="email">
+      <input id="login-pass"  type="password" placeholder="Mot de passe"   required autocomplete="current-password">
+      <div id="login-msg" class="modal-msg"></div>
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+      <div style="display:flex;gap:8px;">
+        <input id="reg-prenom" type="text"     placeholder="Prénom" required style="flex:1">
+        <input id="reg-nom"    type="text"     placeholder="Nom"    required style="flex:1">
       </div>
+      <input id="reg-email"  type="email"    placeholder="Email"                  required autocomplete="email">
+      <input id="reg-pass"   type="password" placeholder="Mot de passe (6 car. min)" required autocomplete="new-password">
+      <input id="reg-pass2"  type="password" placeholder="Confirmer le mot de passe"  required>
+      <div id="reg-msg" class="modal-msg"></div>
+      <button type="submit">Créer mon compte</button>
+    </form>
+  </div>
+</div>
 
-      <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
-        <input id="login-email" type="email" placeholder="Email" required autocomplete="email">
-        <input id="login-pass" type="password" placeholder="Mot de passe" required autocomplete="current-password">
-        <div id="login-msg" class="modal-msg"></div>
-        <button type="submit">Se connecter</button>
-      </form>
+<!-- ══ PRODUCT EDITOR MODAL ════════════════════════════════════ -->
+<div id="product-editor-modal">
+  <div class="pe-box">
+    <h2 id="pe-title">Modifier le produit <button class="modal-close" onclick="closeProductEditor()">✕</button></h2>
 
-      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
-        <input id="reg-name" type="text" placeholder="Prénom & Nom" required>
-        <input id="reg-email" type="email" placeholder="Email" required autocomplete="email">
-        <input id="reg-pass" type="password" placeholder="Mot de passe" required autocomplete="new-password">
-        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
-        <div id="reg-msg" class="modal-msg"></div>
-        <button type="submit">Créer mon compte</button>
-      </form>
+    <div class="pe-field">
+      <label for="pe-img-file">Image du produit</label>
+      <img id="pe-img-preview" class="pe-img-preview" alt="Aperçu">
+      <label for="pe-img-file" class="pe-img-upload-label">
+        📷 Choisir une image
+        <input type="file" id="pe-img-file" accept="image/*" style="display:none" onchange="handleProductImageChange(this)">
+      </label>
+    </div>
+
+    <div class="pe-field">
+      <label for="pe-name">Nom du produit</label>
+      <input type="text" id="pe-name" placeholder="ex: Cappuccino Vanille">
+    </div>
+
+    <div class="pe-field">
+      <label for="pe-desc">Description</label>
+      <textarea id="pe-desc" placeholder="Ingrédients, caractéristiques, auteur…"></textarea>
+    </div>
+
+    <div style="display:flex;gap:12px;">
+      <div class="pe-field" style="flex:1">
+        <label for="pe-price">Prix (€)</label>
+        <input type="number" id="pe-price" placeholder="ex: 4.50" step="0.01" min="0">
+      </div>
+      <div class="pe-field" style="flex:1">
+        <label for="pe-stock">Stock</label>
+        <input type="number" id="pe-stock" placeholder="ex: 20" min="0">
+      </div>
+    </div>
+
+    <div id="pe-msg" class="pe-msg"></div>
+
+    <div class="pe-actions">
+      <button class="pe-btn-cancel" onclick="closeProductEditor()">Annuler</button>
+      <button class="pe-btn-save"   onclick="saveProductEditor()">💾 Enregistrer</button>
     </div>
   </div>
+</div>
 
-  <!-- CART PANEL -->
-  <div id="cart-panel">
-    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
-    <div id="cart-list"></div>
-    <div id="cart-total"></div>
-    <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
-  </div>
+<!-- ══ CART PANEL ═══════════════════════════════════════════════ -->
+<div id="cart-panel">
+  <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
+  <div id="cart-list"></div>
+  <div id="cart-total"></div>
+  <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
+</div>
 
   <script src="sepiamoka.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => renderProducts('boisson', 'products-boisson'));
+  </script>
 </body>
 </html>

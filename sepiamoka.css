@@ -157,8 +157,12 @@ nav a:hover { opacity: 0.7; }
 }
 .modal-tab.active { color: var(--green); border-bottom-color: var(--green); }
 .modal-form {
+  display: flex;
   flex-direction: column;
   gap: 12px;
+}
+.modal-form[style*="display:none"] {
+  display: none !important;
 }
 .modal-form input {
   padding: 10px 14px;
@@ -335,7 +339,139 @@ nav a:hover { opacity: 0.7; }
 }
 .btn-add-cart:hover { background: var(--green-light); transform: scale(1.04); }
 
-/* ---- TICKER ---- */
+/* ---- ADMIN PRODUCT BUTTONS ---- */
+.admin-product-btns {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+}
+.btn-admin-edit, .btn-admin-del {
+  padding: 5px 10px;
+  font-size: 11px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+.btn-admin-edit { background: #e8f4e8; color: var(--green); border: 1px solid var(--green); }
+.btn-admin-edit:hover { background: var(--green); color: white; }
+.btn-admin-del { background: #fdecea; color: #c0392b; border: 1px solid #c0392b; }
+.btn-admin-del:hover { background: #c0392b; color: white; }
+
+.product-add-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 300px;
+  border: 2.5px dashed rgba(47,94,47,0.35);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.product-add-new:hover { border-color: var(--green); background: rgba(47,94,47,0.05); }
+.add-new-inner { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--green); }
+.add-new-icon { font-size: 36px; line-height: 1; }
+
+/* ---- PRODUCT EDITOR MODAL ---- */
+#product-editor-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1100;
+  align-items: center;
+  justify-content: center;
+}
+.pe-box {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 36px 40px;
+  width: 440px;
+  max-width: 95vw;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.pe-box h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 20px;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pe-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 14px; }
+.pe-field label { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--green); }
+.pe-field input, .pe-field textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  background: white;
+  color: var(--green);
+  outline: none;
+}
+.pe-field input:focus, .pe-field textarea:focus { border-color: var(--green); }
+.pe-field textarea { resize: vertical; min-height: 80px; }
+.pe-img-preview {
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: none;
+}
+.pe-img-upload-label {
+  display: inline-block;
+  padding: 9px 16px;
+  background: rgba(47,94,47,0.1);
+  border: 1.5px solid var(--green);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+  transition: background 0.2s;
+}
+.pe-img-upload-label:hover { background: var(--green); color: white; }
+.pe-actions { display: flex; gap: 10px; margin-top: 18px; }
+.pe-btn-save {
+  flex: 1;
+  padding: 12px;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+.pe-btn-cancel {
+  padding: 12px 18px;
+  background: transparent;
+  color: var(--green);
+  border: 1.5px solid var(--green);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+.pe-msg { color: #c0392b; font-size: 12px; min-height: 16px; margin-top: 4px; }
+.admin-banner {
+  background: var(--green);
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
 .ticker {
   white-space: nowrap;
   overflow: hidden;
