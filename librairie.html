@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sépia & Moka – Librairie</title>
+  <link rel="stylesheet" href="sepiamoka.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="coffee.html">coffee</a>
+      <a href="contact.html">Contact</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+    <div class="logo">Sépia & Moka</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="auth-area"></div>
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        🛒<span class="cart-count"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="ticker">
+    <span>Profitez de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveaux titres chaque mois &nbsp;&nbsp;&nbsp;</span>
+  </div>
+
+  <section class="hero">
+    Bienvenue chers lecteurs,<br>
+    CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFÉ !
+  </section>
+
+  <h3 class="section-title">Nos histoires à la Wattpad</h3>
+
+  <section class="products">
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>À tous les garçons que j'ai aimés</strong><br>
+        Jenny Han<br>
+        Romance Young Adult – 320 pages<br>
+        📖 Bestseller mondial<br>
+        ⭐ 17€
+      </div>
+      <img src="1_9782822241977_1_75.jpg" alt="A tous les garçons que j'ai aimé" width="200" height="220">
+      <div>À tous les garçons que j'ai aimé<br>17€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-jenny-han',name:'À tous les garçons que j\'ai aimé',price:17})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Red, White & Royal Blue</strong><br>
+        Casey McQuiston<br>
+        Romance & politique – 416 pages<br>
+        🇺🇸🇬🇧 Drôle & touchant<br>
+        ⭐ 15€
+      </div>
+      <img src="71Fq7XMmjEL._SL1500_.jpg" alt="Red White & Royal Blue" width="200" height="220">
+      <div>Red White & Royal Blue<br>15€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-rwrb',name:'Red White & Royal Blue',price:15})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>The Long Game (Heated Rivalry)</strong><br>
+        Rachel Reid<br>
+        Romance sportive – 384 pages<br>
+        🏒 Rivalité & passion<br>
+        ⭐ 25€
+      </div>
+      <img src="71LLGT0DIxL._SL1500_.jpg" alt="The Long Game (Heated Rivalry)" width="200" height="220">
+      <div>The Long Game (Heated Rivalry)<br>25€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-long-game',name:'The Long Game',price:25})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>La chronique des Bridgerton – Tome 3</strong><br>
+        Julia Quinn<br>
+        Romance historique – 368 pages<br>
+        🌹 Époque victorienne<br>
+        ⭐ 23€
+      </div>
+      <img src="la_chronique_des_bridgerton_tome_3_benedict-1472181-264-432.jpg" alt="La chronique des Bridgerton – Tome 3" width="200" height="220">
+      <div>La chronique des Bridgerton – Tome 3<br>23€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-bridgerton-3',name:'Bridgerton – Tome 3',price:23})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>The Original</strong><br>
+        Roman feel-good<br>
+        Ambiance café & livres – 290 pages<br>
+        ☕ Cozy & inspirant<br>
+        ⭐ 15€
+      </div>
+      <img src="Cozy Book Café Corner _ Warm Lights, Coffee & Stacks of Books _ Vision Board _ Cozy Living.jpg" alt="The Original" width="200" height="220">
+      <div>The Original<br>15€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-original',name:'The Original',price:15})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Donjons & Dragons</strong><br>
+        Manuel de jeu officiel<br>
+        Fantaisie & aventure – 312 pages<br>
+        🐉 Pour vrais aventuriers<br>
+        ⭐ 14,50€
+      </div>
+      <img src="81VpJt4SpDL._SL1500_.jpg" alt="Donjons & Dragons" width="200" height="220">
+      <div>Donjons & Dragons<br>14,50€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'livre-dnd',name:'Donjons & Dragons',price:14.5})">+ Panier</button>
+    </div>
+
+  </section>
+
+  <footer></footer>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2>Sépia & Moka</h2>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
+        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+      </div>
+      <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
+        <input id="login-email" type="email" placeholder="Email" required>
+        <input id="login-pass" type="password" placeholder="Mot de passe" required>
+        <div id="login-msg" class="modal-msg"></div>
+        <button type="submit">Se connecter</button>
+      </form>
+      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+        <input id="reg-name" type="text" placeholder="Prénom & Nom" required>
+        <input id="reg-email" type="email" placeholder="Email" required>
+        <input id="reg-pass" type="password" placeholder="Mot de passe" required>
+        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <div id="reg-msg" class="modal-msg"></div>
+        <button type="submit">Créer mon compte</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART PANEL -->
+  <div id="cart-panel">
+    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
+    <div id="cart-list"></div>
+    <div id="cart-total"></div>
+    <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
+  </div>
+
+  <script src="sepiamoka.js"></script>
+</body>
+</html>

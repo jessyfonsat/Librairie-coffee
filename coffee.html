@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sépia & Moka – Accueil</title>
+  <link rel="stylesheet" href="sepiamoka.css" />
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="contact.html">Contact</a>
+      <a href="librairie.html">Librairie</a>
+      <a href="apropos.html">À propos</a>
+    </nav>
+    <div class="logo">Sépia & Moka</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="auth-area"></div>
+      <button class="cart-btn" onclick="toggleCart()" aria-label="Panier">
+        🛒<span class="cart-count"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="ticker">
+    <span>Profiter de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveautés chaque semaine &nbsp;&nbsp;&nbsp; Venez nous rendre visite !</span>
+  </div>
+
+  <section class="hero">
+    Bienvenue chers lecteurs,<br>
+    CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFÉ !
+  </section>
+
+  <h3 class="section-title">Parce que nous savons que vous les aimerez :p</h3>
+
+  <section class="products">
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Matcha Latte</strong><br>
+        Thé matcha japonais, lait végétal moussé.<br>
+        ☕ Douceur végétale<br>
+        🌿 Sans caféine forte<br>
+        ⭐ 7€
+      </div>
+      <img src="103507218.jpg" alt="Macha" width="200" height="220">
+      <div>Matcha<br>7€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-matcha',name:'Matcha Latte',price:7})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Moka</strong><br>
+        Espresso double, chocolat, lait crémeux.<br>
+        ☕ Intense & gourmand<br>
+        🍫 Notes chocolatées<br>
+        ⭐ 5€
+      </div>
+      <img src="63d1e7f3-be97-494b-bc2e-2c5fc7e9b99d_bSPeBjy.jpg" alt="Moka" width="200" height="220">
+      <div>Moka<br>5€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-moka',name:'Moka',price:5})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Chai Latte</strong><br>
+        Mélange d'épices (cannelle, cardamome, gingembre) & lait chaud.<br>
+        🌶 Épicé & réconfortant<br>
+        🍵 Origine Inde<br>
+        ⭐ 5€
+      </div>
+      <img src="Chai.jpg" alt="Chai" width="200" height="220">
+      <div>Chai<br>5€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-chai',name:'Chai Latte',price:5})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Café</strong><br>
+        Espresso simple, grains sélectionnés.<br>
+        ☕ Classique & fort<br>
+        ⚡ Réveil assuré<br>
+        ⭐ 3€
+      </div>
+      <img src="1055859-fu-patisserie-et-coffee-shop-paris-13e-cafe-latte.jpg" alt="Café" width="200" height="220">
+      <div>Café<br>3€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-cafe',name:'Café',price:3})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Latte</strong><br>
+        Espresso allongé, lait texturé, mousse douce.<br>
+        ☕ Doux & crémeux<br>
+        🥛 Lait entier ou végétal<br>
+        ⭐ 4,50€
+      </div>
+      <img src="site-malongo-5-1024x614.jpg" alt="Latte" width="200" height="220">
+      <div>Latte<br>4,50€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-latte',name:'Latte',price:4.5})">+ Panier</button>
+    </div>
+
+    <div class="product">
+      <div class="product-tooltip">
+        <strong>Thé glacé à l'orange</strong><br>
+        Thé vert infusé à froid, jus d'orange pressé, menthe.<br>
+        🍊 Frais & vitaminé<br>
+        🧊 Servi avec glaçons<br>
+        ⭐ 4,50€
+      </div>
+      <img src="iced-coffee-drink-menu-orange-americano-fusion-with-fresh-orange-fruit-mixed-in-a-plastic-cup-drink-menu-product-free-photo.jpg" alt="Thé glacé à l'orange" width="200" height="220">
+      <div>Thé glacé à l'orange<br>4,50€</div>
+      <button class="btn-add-cart" onclick="addToCart({id:'boisson-the-glace',name:'Thé glacé à l\'orange',price:4.5})">+ Panier</button>
+    </div>
+
+  </section>
+
+  <footer></footer>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <h2>Sépia & Moka</h2>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login" onclick="switchTab('login')">Connexion</button>
+        <button class="modal-tab" data-tab="register" onclick="switchTab('register')">Créer un compte</button>
+      </div>
+
+      <form class="modal-form" data-form="login" style="display:flex" onsubmit="handleLogin(event)">
+        <input id="login-email" type="email" placeholder="Email" required autocomplete="email">
+        <input id="login-pass" type="password" placeholder="Mot de passe" required autocomplete="current-password">
+        <div id="login-msg" class="modal-msg"></div>
+        <button type="submit">Se connecter</button>
+      </form>
+
+      <form class="modal-form" data-form="register" style="display:none" onsubmit="handleRegister(event)">
+        <input id="reg-name" type="text" placeholder="Prénom & Nom" required>
+        <input id="reg-email" type="email" placeholder="Email" required autocomplete="email">
+        <input id="reg-pass" type="password" placeholder="Mot de passe" required autocomplete="new-password">
+        <input id="reg-pass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <div id="reg-msg" class="modal-msg"></div>
+        <button type="submit">Créer mon compte</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- CART PANEL -->
+  <div id="cart-panel">
+    <h2>Mon panier <button class="cart-close" onclick="toggleCart()">✕</button></h2>
+    <div id="cart-list"></div>
+    <div id="cart-total"></div>
+    <button class="btn-checkout" onclick="alert('Fonctionnalité de paiement à venir !')">Commander →</button>
+  </div>
+
+  <script src="sepiamoka.js"></script>
+</body>
+</html>
