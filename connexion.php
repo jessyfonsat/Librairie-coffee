@@ -1,8 +1,8 @@
 <?php
-$host   = "localhost";
-$dbname = "librairie-coffee";
-$user   = "root";
-$pass   = "";
+$host   = "sql313.infinityfree.com";
+$dbname = "if0_41813847_LIBRAIRIE";
+$user   = "if0_41813847";
+$pass   = "salut123aze";
 
 try {
     $pdo = new PDO(
@@ -13,6 +13,6 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    die(json_encode(['error' => 'Erreur connexion : ' . $e->getMessage()]));
+    die(json_encode(['ok' => false, 'error' => 'Erreur connexion : ' . $e->getMessage()]));
 }
 ?>
