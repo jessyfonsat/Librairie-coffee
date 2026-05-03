@@ -1,8 +1,8 @@
 <?php
-$host   = "localhost";
-$dbname = "librairie-coffee";
-$user   = "root";
-$pass   = "";
+$host   = "sql313.infinityfree.com";
+$dbname = "if0_41813847_LIBRAIRIE";
+$user   = "if0_41813847";
+$pass   = "salut123aze";
 
 try {
     $pdo = new PDO(
