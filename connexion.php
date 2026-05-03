@@ -1,12 +1,12 @@
 <?php
-$host   = "sql313.infinityfree.com";
-$dbname = "if0_41813847_LIBRAIRIE";
-$user   = "if0_41813847";
-$pass   = "salut123aze";
+$host   = "localhost";
+$dbname = "librairie-coffee";
+$user   = "root";
+$pass   = "";
 
 try {
     $pdo = new PDO(
-        "mysql:host=localhost;port=3307;dbname=$dbname;charset=utf8mb4",
+        "mysql:host=$host;port=3307;dbname=$dbname;charset=utf8mb4",
         $user,
         $pass
     );
