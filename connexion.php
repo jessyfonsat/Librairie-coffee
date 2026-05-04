@@ -24,3 +24,5 @@ try {
     die(json_encode(['ok' => false, 'error' => 'Erreur connexion : ' . $e->getMessage()]));
 }
 ?>
+
+// lksdjlkjflsjflksq
