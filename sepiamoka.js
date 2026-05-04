@@ -263,9 +263,16 @@ async function renderProducts(category, containerId) {
         const imgSrc = p.image_produit || '';
         return `
         <div class="product" data-id="${escHtml(p.id_produit)}">
-          <img src="${escHtml(imgSrc)}" alt="${escHtml(p.Nom_produit)}" width="200" height="220"
-               style="object-fit:cover;border-radius:8px;display:block;"
-               onerror="this.style.background='#ddd';this.removeAttribute('src')">
+          <div class="product-img-wrap">
+            <img src="${escHtml(imgSrc)}" alt="${escHtml(p.Nom_produit)}" width="200" height="220"
+                 style="object-fit:cover;border-radius:8px;display:block;"
+                 onerror="this.style.background='#ddd';this.removeAttribute('src')">
+            <div class="product-tooltip">
+              <strong>${escHtml(p.Nom_produit)}</strong><br><br>
+              ${escHtml(p.description_produit)}<br><br>
+              ${p.stock_produit > 0 ? 'Stock : ' + p.stock_produit : '<span style="color:#ff8a80">Rupture de stock</span>'}
+            </div>
+          </div>
           <div style="margin-top:6px;">${escHtml(p.Nom_produit)}<br>${parseFloat(p.prix_produit).toFixed(2)}€</div>
           <button class="btn-add-cart"
             data-id="${escHtml(p.id_produit)}"
