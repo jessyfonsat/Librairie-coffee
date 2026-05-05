@@ -139,6 +139,12 @@ function getCart()   { try { return JSON.parse(localStorage.getItem('sm_cart') |
 function saveCart(c) { localStorage.setItem('sm_cart', JSON.stringify(c)); }
 
 function addToCart(product) {
+    if (!_currentUser) {
+        openModal('login');
+        const msg = document.getElementById('login-msg');
+        if (msg) msg.textContent = '⚠️ Connectez-vous pour ajouter des articles au panier.';
+        return;
+    }
     const cart = getCart();
     const existing = cart.find(i => i.id === product.id);
     if (existing) existing.qty++;
@@ -436,8 +442,8 @@ function escHtml(s) {
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // FIX : fetchMe ne déclenche plus renderProducts (skipRender=true)
-    // renderProducts est appelé séparément par chaque page via son propre script
+    
+    
     await fetchMe();
     updateCartUI();
 
