@@ -1,10 +1,6 @@
-// ===== SEPIA & MOKA — sepiamoka.js =====
-// Auth & produits → API PHP (api_produits.php)
-// Panier          → localStorage (côté client)
-
 const API = 'api_produits.php';
 
-// ─── API HELPER ──────────────────────────────────────────────────────────────
+
 
 async function apiGet(action, params = {}) {
     const url = new URL(API, location.href);
@@ -34,14 +30,11 @@ async function apiPostFile(action, data = {}, fileField, file) {
     return res.json();
 }
 
-// ─── AUTH ─────────────────────────────────────────────────────────────────────
+
 
 let _currentUser = null;
 
-// FIX BOUCLE INFINIE :
-// Ancienne logique : fetchMe → updateAuthUI → renderProducts → (fetchMe via DOMContentLoaded = boucle)
-// Nouvelle logique : fetchMe → updateAuthUI(skipRender=true) → rien
-//                   renderProducts est appelé UNE SEULE FOIS explicitement par chaque page HTML
+
 async function fetchMe() {
     try {
         const data = await apiGet('me');
@@ -49,7 +42,7 @@ async function fetchMe() {
     } catch (e) {
         _currentUser = null;
     }
-    updateAuthUI(true); // skipRender=true : pas de renderProducts ici
+    updateAuthUI(true); 
     return _currentUser;
 }
 
@@ -59,10 +52,10 @@ function isAdmin() { return _currentUser && _currentUser.role === 'admin'; }
 async function logout() {
     try { await apiPost('logout'); } catch (e) { /* ignore */ }
     _currentUser = null;
-    updateAuthUI(false); // skipRender=false : on re-rend les produits après logout
+    updateAuthUI(false); 
 }
 
-// FIX : skipRender contrôle si on re-déclenche renderProducts
+
 function updateAuthUI(skipRender = false) {
     const user = _currentUser;
     document.querySelectorAll('.auth-area').forEach(el => {
@@ -80,7 +73,7 @@ function updateAuthUI(skipRender = false) {
     }
 }
 
-// ─── AUTH MODAL ───────────────────────────────────────────────────────────────
+
 
 function openModal(tab) {
     const m = document.getElementById('auth-modal');
@@ -107,7 +100,7 @@ async function handleLogin(e) {
         if (data.ok) {
             _currentUser = data.user;
             closeModal();
-            updateAuthUI(false); // re-rend les produits avec boutons admin si admin
+            updateAuthUI(false); 
         } else {
             msg.textContent = data.error;
         }
@@ -140,7 +133,7 @@ async function handleRegister(e) {
     }
 }
 
-// ─── CART (localStorage) ─────────────────────────────────────────────────────
+
 
 function getCart()   { try { return JSON.parse(localStorage.getItem('sm_cart') || '[]'); } catch { return []; } }
 function saveCart(c) { localStorage.setItem('sm_cart', JSON.stringify(c)); }
@@ -221,12 +214,11 @@ function showCartToast(name) {
     t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
 }
 
-// ─── PRODUCT RENDERING ───────────────────────────────────────────────────────
 
 let _currentCategory    = undefined;
 let _currentContainerId = undefined;
 
-// FIX : renderProducts ne fait plus appel à fetchMe — pas de boucle possible
+
 async function renderProducts(category, containerId) {
     _currentCategory    = category;
     _currentContainerId = containerId;
@@ -299,7 +291,7 @@ async function renderProducts(category, containerId) {
 
     container.innerHTML = cards + addBtn;
 
-    // Event delegation — no inline onclick needed
+    
     container.querySelectorAll('.btn-add-cart').forEach(btn => {
         btn.addEventListener('click', function() {
             addToCart({
@@ -322,7 +314,7 @@ async function confirmDeleteProduct(id) {
     }
 }
 
-// ─── PRODUCT EDITOR ──────────────────────────────────────────────────────────
+
 
 let _editorCategory  = null;
 let _editorProductId = null;
@@ -433,7 +425,7 @@ async function saveProductEditor() {
     }
 }
 
-// ─── UTILS ───────────────────────────────────────────────────────────────────
+
 
 function escHtml(s) {
     return String(s ?? '')
@@ -441,7 +433,7 @@ function escHtml(s) {
         .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     // FIX : fetchMe ne déclenche plus renderProducts (skipRender=true)

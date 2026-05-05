@@ -1,8 +1,4 @@
 <?php
-/**
- * api_produits.php
- * API JSON pour la gestion des produits Sépia & Moka
- */
 
 session_start();
 header('Content-Type: application/json; charset=utf-8');
@@ -12,7 +8,7 @@ require 'connexion.php';
 
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
 
-// ─── HELPERS ────────────────────────────────────────────────────────────────
+
 
 function jsonOk($data = [])  { echo json_encode(['ok' => true]  + $data); exit; }
 function jsonErr($msg)        { echo json_encode(['ok' => false, 'error' => $msg]); exit; }
@@ -29,7 +25,7 @@ function generateId($prefix = '') {
     return $prefix . bin2hex(random_bytes(8));
 }
 
-// ─── AUTH ────────────────────────────────────────────────────────────────────
+
 
 if ($action === 'login') {
     $email = trim($_POST['email'] ?? '');
@@ -44,17 +40,17 @@ if ($action === 'login') {
         jsonErr('Email ou mot de passe incorrect.');
     }
 
-    // Vérifie le mot de passe — supporte password_hash ET mot de passe en clair (migration)
+    
     $mdp = $client['mot_de_passe'] ?? '';
     $ok  = false;
 
     if (strlen($mdp) > 0 && $mdp[0] === '$') {
-        // Hash bcrypt
+        
         $ok = password_verify($pass, $mdp);
     } else {
-        // Mot de passe en clair (ancien compte)
+        
         $ok = ($pass === $mdp);
-        // On en profite pour hasher maintenant
+        
         if ($ok) {
             $hash = password_hash($pass, PASSWORD_DEFAULT);
             $pdo->prepare("UPDATE client SET mot_de_passe=? WHERE _Id_client=?")->execute([$hash, $client['_Id_client']]);
@@ -111,7 +107,6 @@ if ($action === 'me') {
     else jsonOk(['user' => null]);
 }
 
-// ─── PRODUITS ────────────────────────────────────────────────────────────────
 
 if ($action === 'list') {
     $type = $_GET['type'] ?? null;
@@ -186,8 +181,6 @@ if ($action === 'delete') {
     $pdo->prepare("DELETE FROM produit WHERE id_produit = ?")->execute([$id]);
     jsonOk();
 }
-
-// ─── UPLOAD IMAGE ────────────────────────────────────────────────────────────
 
 if ($action === 'upload_image') {
     requireAdmin();
