@@ -132,13 +132,16 @@ $page = $_GET['page'] ?? 'accueil';
   </header>
 
   <div class="ticker">
-    <span>Profiter de nos boissons chaudes et de nos livres!</span>
+    <div class="ticker-track">
+      <span>Profitez de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveautés chaque semaine &nbsp;&nbsp;&nbsp; Venez nous rendre visite !</span>
+      <span>Profitez de nos boissons chaudes et de nos livres ! &nbsp;&nbsp;&nbsp; Nouveautés chaque semaine &nbsp;&nbsp;&nbsp; Venez nous rendre visite !</span>
+    </div>
   </div>
 
   <?php if ($page == 'accueil') : ?>
     <section class="hero">
-      Bienvenue chère lecteurs,<br>
-      CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFE!
+      Bienvenue chers lecteurs,<br>
+      CHEZ NOUS ON DÉVORE LES LIVRES AUTOUR D'UN BON CAFÉ !
     </section>
   <?php endif; ?>
 
@@ -149,11 +152,11 @@ $page = $_GET['page'] ?? 'accueil';
       }
 
       elseif ($page == 'menu') {
-        include 'coffee.html';
+        include 'boissons.html';
       }
 
       elseif ($page == 'librairie') {
-        include 'Produits.php';
+        include 'librairie.html';
       }
 
       elseif ($page == 'apropos') {
@@ -166,7 +169,16 @@ $page = $_GET['page'] ?? 'accueil';
     ?>
   </main>
 
-  <footer></footer>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">Sépia &amp; Moka</span>
+        <p>Café-librairie indépendant</p>
+        <p>Ouvert du mardi au dimanche · 9h–19h</p>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Sépia &amp; Moka — Tous droits réservés</div>
+  </footer>
 
 </body>
 </html>

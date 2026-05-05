@@ -1,7 +1,7 @@
 /* ===== SEPIA & MOKA ===== */
 
 :root {
-  --bg:           #e7e0c9;
+  --bg:           #e7e1ca;
   --green:        #2f5e2f;
   --green-light:  #4a8a4a;
   --cream:        #f5f0e8;
@@ -50,6 +50,14 @@ header {
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logo-chien {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 }
 
 nav a {
@@ -130,7 +138,9 @@ nav a:hover { opacity: 0.65; }
   font-weight: 700;
   color: var(--green);
   background: rgba(255,255,255,0.35);
+  flex-shrink: 0;
 }
+
 .ticker-track {
   display: inline-flex;
   animation: ticker-scroll 30s linear infinite;
@@ -501,4 +511,3 @@ footer {
   opacity: 0.4;
   text-align: center;
 }
-

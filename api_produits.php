@@ -36,7 +36,6 @@ if ($action === 'login') {
     $pass  = $_POST['password'] ?? '';
     if (!$email || !$pass) jsonErr('Email et mot de passe requis.');
 
-    global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM client WHERE e_mail_client = ?");
     $stmt->execute([$email]);
     $client = $stmt->fetch();
@@ -83,7 +82,6 @@ if ($action === 'register') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL))  jsonErr('Email invalide.');
     if (strlen($pass) < 6) jsonErr('Le mot de passe doit faire au moins 6 caractères.');
 
-    global $pdo;
     $check = $pdo->prepare("SELECT _Id_client FROM client WHERE e_mail_client = ?");
     $check->execute([$email]);
     if ($check->fetch()) jsonErr('Cet email est déjà utilisé.');
@@ -117,7 +115,6 @@ if ($action === 'me') {
 
 if ($action === 'list') {
     $type = $_GET['type'] ?? null;
-    global $pdo;
     if ($type) {
         $stmt = $pdo->prepare("SELECT * FROM produit WHERE type_produit = ? ORDER BY Nom_produit");
         $stmt->execute([$type]);
@@ -131,7 +128,6 @@ if ($action === 'list') {
 if ($action === 'get') {
     $id = $_GET['id'] ?? '';
     if (!$id) jsonErr('ID manquant.');
-    global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM produit WHERE id_produit = ?");
     $stmt->execute([$id]);
     $p = $stmt->fetch();
@@ -150,7 +146,6 @@ if ($action === 'add') {
 
     if (!$nom || !$description || !$prix || !$type) jsonErr('Champs obligatoires manquants.');
 
-    global $pdo;
     $id = generateId('prod_');
     $pdo->prepare("INSERT INTO produit (id_produit, Nom_produit, description_produit, prix_produit, type_produit, stock_produit, image_produit)
                    VALUES (?, ?, ?, ?, ?, ?, ?)")
@@ -171,7 +166,6 @@ if ($action === 'edit') {
 
     if (!$id || !$nom || !$description || !$prix || !$type) jsonErr('Champs obligatoires manquants.');
 
-    global $pdo;
     $sets   = "Nom_produit=?, description_produit=?, prix_produit=?, type_produit=?, stock_produit=?";
     $params = [$nom, $description, $prix, $type, $stock];
 
@@ -189,7 +183,6 @@ if ($action === 'delete') {
     requireAdmin();
     $id = trim($_POST['id'] ?? '');
     if (!$id) jsonErr('ID manquant.');
-    global $pdo;
     $pdo->prepare("DELETE FROM produit WHERE id_produit = ?")->execute([$id]);
     jsonOk();
 }
