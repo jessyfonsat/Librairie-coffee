@@ -1,31 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 5.2.3
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1:3306
--- Généré le : mar. 05 mai 2026 à 08:07
--- Version du serveur : 8.4.7
--- Version de PHP : 8.3.28
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de données : `librairie-coffee`
---
-
--- --------------------------------------------------------
-
---
--- Structure de la table `adresse`
---
 
 DROP TABLE IF EXISTS `adresse`;
 CREATE TABLE IF NOT EXISTS `adresse` (
@@ -38,11 +15,6 @@ CREATE TABLE IF NOT EXISTS `adresse` (
   PRIMARY KEY (`_id_adresse`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `client`
---
 
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
@@ -57,19 +29,11 @@ CREATE TABLE IF NOT EXISTS `client` (
   PRIMARY KEY (`_Id_client`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `client`
---
 
 INSERT INTO `client` (`_Id_client`, `Nom_client`, `prenom_client`, `e_mail_client`, `telephone_client`, `date_inscription_`, `mot_de_passe`, `role`) VALUES
 ('cli_6adf0cd0305885fd', 'jess', 'jess', 'jessy.fonsat@gmail.com', NULL, '2026-05-02', '$2y$10$CdHC0QYX7fGAdkcBDHC.KulZCIMwbPJA77VSqMiRjYNc173I1sGNm', 'client'),
 ('cli_admin_default', 'Moka', 'Admin', 'admin@sepiamoka.fr', NULL, '2026-05-02', '$2y$10$qr0GHyh8c.AiMif7/X3kfOco.RogmLOak6RInCewDTYAmh4Zov.8.', 'admin');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `commande`
---
 
 DROP TABLE IF EXISTS `commande`;
 CREATE TABLE IF NOT EXISTS `commande` (
@@ -82,11 +46,6 @@ CREATE TABLE IF NOT EXISTS `commande` (
   PRIMARY KEY (`_id_commande`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `contenu_commande`
---
 
 DROP TABLE IF EXISTS `contenu_commande`;
 CREATE TABLE IF NOT EXISTS `contenu_commande` (
@@ -98,11 +57,6 @@ CREATE TABLE IF NOT EXISTS `contenu_commande` (
   PRIMARY KEY (`Id_CONTENU_COMMANDE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `produit`
---
 
 DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
@@ -116,9 +70,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
   PRIMARY KEY (`id_produit`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Déchargement des données de la table `produit`
---
+
 
 INSERT INTO `produit` (`id_produit`, `Nom_produit`, `description_produit`, `prix_produit`, `type_produit`, `stock_produit`, `image_produit`) VALUES
 ('prod_034d62dbd9d5c9f0', 'Chocolat chaud', 'Boisson chaude réconfortante à base de chocolat et de lait, le chocolat chaud séduit par sa texture onctueuse et son goût riche en cacao. Doux et gourmand, il peut être légèrement sucré et parfois agrémenté de crème ou de mousse de lait. Parfait pour une pause cocooning à tout moment de la journée.', 4.00, 'boisson', 10, 'uploads/img_720ac9b86d480e86.jpg'),
@@ -145,7 +97,3 @@ INSERT INTO `produit` (`id_produit`, `Nom_produit`, `description_produit`, `prix
 ('prod_rwrb', 'Red White & Royal Blue', 'Casey McQuiston – Romance et politique – 416 pages. Drôle et touchant.', 15.00, 'livre', 20, '71Fq7XMmjEL._SL1500_.jpg'),
 ('prod_the_glace', 'Thé glacé à l\'orange', 'Thé vert infusé à froid, jus d\'orange pressé, menthe. Frais et vitaminé.', 4.50, 'boisson', 50, 'iced-coffee-drink-menu-orange-americano-fusion-with-fresh-orange-fruit-mixed-in-a-plastic-cup-drink-menu-product-free-photo.jpg');
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
