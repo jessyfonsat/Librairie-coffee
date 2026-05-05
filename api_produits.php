@@ -209,21 +209,23 @@ if ($action === 'commande') {
 
     if (!$mode || !$adresse || !$date || !$heure) jsonErr('Données de commande incomplètes.');
 
-    // Créer la table si elle n'existe pas encore
+    // Créer la table si elle n'existe pas encore (compatible avec le schéma SQL fourni)
     $pdo->exec("CREATE TABLE IF NOT EXISTS commande (
-        id_commande    VARCHAR(32)    PRIMARY KEY,
-        id_client      VARCHAR(32)    NOT NULL,
-        mode_livraison VARCHAR(20)    NOT NULL,
-        adresse        VARCHAR(255)   NOT NULL,
-        ville          VARCHAR(100)   NOT NULL,
-        date_souhaitee DATE           NOT NULL,
-        heure_souhaitee TIME          NOT NULL,
-        note           TEXT,
-        total          DECIMAL(10,2)  NOT NULL,
-        articles       TEXT           NOT NULL,
-        date_commande  DATETIME       DEFAULT CURRENT_TIMESTAMP,
-        statut         VARCHAR(30)    DEFAULT 'en attente'
-    )");
+        id_commande     VARCHAR(32)   PRIMARY KEY,
+        id_client       VARCHAR(50)   NOT NULL,
+        mode_livraison  VARCHAR(50)   DEFAULT NULL,
+        adresse         VARCHAR(255)  DEFAULT NULL,
+        ville           VARCHAR(100)  DEFAULT NULL,
+        date_souhaitee  DATE          DEFAULT NULL,
+        heure_souhaitee TIME          DEFAULT NULL,
+        note            TEXT,
+        total           DECIMAL(15,2) NOT NULL,
+        articles        TEXT          NOT NULL,
+        date_commande   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
+        statut          VARCHAR(50)   DEFAULT 'en attente',
+        CONSTRAINT fk_commande_client FOREIGN KEY (id_client)
+            REFERENCES client(_Id_client) ON DELETE CASCADE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
     $id_commande = generateId('cmd_');
     $pdo->prepare("INSERT INTO commande

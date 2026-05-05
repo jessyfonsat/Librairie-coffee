@@ -746,3 +746,113 @@ footer {
   background: white;
   cursor: pointer;
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   STYLES DÉPLACÉS DU JS (inline cssText → classes CSS)
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Panel commandes admin (overlay) ── */
+#orders-panel {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 1300;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* ── Modal checkout (overlay) ── */
+#checkout-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  z-index: 1200;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* Recap panier dans checkout */
+.checkout-recap {
+  background: rgba(47,94,47,.07);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+.checkout-recap-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  opacity: .85;
+}
+.checkout-recap-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+/* Formulaires livraison / surplace */
+.checkout-info {
+  background: rgba(47,94,47,.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.checkout-hours {
+  font-size: 12px;
+  opacity: .6;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ── Carte commande individuelle ── */
+.order-toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 16px 36px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border);
+}
+.order-toolbar select {
+  padding: 8px 12px;
+  border: 1.5px solid rgba(47,94,47,.3);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--green);
+  background: white;
+  cursor: pointer;
+}
+
+/* ── Utilitaires inline devenus classes ── */
+.flex-gap-10   { display: flex; gap: 10px; }
+.flex-gap-12   { display: flex; gap: 12px; }
+.text-center   { text-align: center; }
+.font-size-12  { font-size: 12px; opacity: .6; }
+
+/* Surplace info-block */
+.surplace-info {
+  background: rgba(47,94,47,.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+.surplace-hours {
+  font-size: 12px;
+  opacity: .6;
+  margin-top: 8px;
+  text-align: center;
+}
