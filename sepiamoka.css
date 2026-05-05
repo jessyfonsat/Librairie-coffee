@@ -121,33 +121,43 @@ nav a:hover { opacity: 0.65; }
 }
 .user-greeting { font-weight: 600; font-size: 13px; }
 
-/* ── TICKER ── */
 .ticker {
   overflow: hidden;
   border-top: 2px solid rgba(47,94,47,0.2);
   border-bottom: 2px solid rgba(47,94,47,0.2);
-  height: 40px;
+  padding: 10px 0;
   font-size: 13px;
   font-weight: 700;
   color: var(--green);
   background: rgba(255,255,255,0.35);
-  display: flex;
-  align-items: center;
 }
 .ticker-track {
-  display: flex;
+  display: inline-flex;
   animation: ticker-scroll 30s linear infinite;
-  white-space: nowrap;
   will-change: transform;
 }
-.ticker-item {
+.ticker-track span {
   white-space: nowrap;
-  padding-right: 80px;
   flex-shrink: 0;
+  padding-right: 80px;
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  display: inline-block;
 }
 @keyframes ticker-scroll {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
+}
+
+@media(max-width: 900px) {
+  .ticker { font-size: 12px; padding: 8px 0; }
+  .ticker-track span { padding-right: 50px; font-size: 12px; }
+}
+@media(max-width: 560px) {
+  .ticker { font-size: 11px; padding: 7px 0; }
+  .ticker-track span { padding-right: 30px; font-size: 11px; }
 }
 
 /* ── HERO ── */
@@ -492,22 +502,3 @@ footer {
   text-align: center;
 }
 
-/* ── RESPONSIVE ── */
-@media(max-width: 900px) {
-  header { padding: 15px 20px; flex-wrap: wrap; gap: 10px; }
-  nav a { margin-right: 12px; font-size: 13px; }
-  .hero { font-size: 22px; padding: 50px 30px 30px; }
-  .footer-inner { grid-template-columns: 1fr 1fr; padding: 36px 24px 20px; gap: 24px; }
-  .footer-bottom { padding: 14px 24px; }
-
-  
-  .ticker { font-size: 12px; padding: 10px 0; }
-  .ticker-track span { padding-right: 60px; }
-}
-@media(max-width: 560px) {
-  .footer-inner { grid-template-columns: 1fr; }
-  .products { gap: 20px; padding: 24px; }
-
-  .ticker { font-size: 11px; padding: 8px 0; }
-  .ticker-track span { padding-right: 40px; }
-}
