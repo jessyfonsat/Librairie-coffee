@@ -233,7 +233,7 @@ function openCheckout() {
     if (!document.getElementById('checkout-modal')) {
         var div = document.createElement('div');
         div.id = 'checkout-modal';
-        div.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;align-items:center;justify-content:center;padding:16px;';
+        div.style.display = 'none';
         div.innerHTML =
             '<div class="checkout-box">' +
             '<h2 style="font-family:\'Playfair Display\',serif;font-size:20px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;">' +
@@ -594,7 +594,7 @@ async function openOrdersPanel() {
         '<div id="orders-list" class="orders-list"><p class="orders-loading">Chargement...</p></div>' +
         '</div>';
 
-    panel.style.cssText = 'display:flex;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1300;align-items:center;justify-content:center;padding:16px;';
+    panel.style.display = 'flex';
     panel.addEventListener('click', function(e) { if (e.target.id === 'orders-panel') closeOrdersPanel(); });
     document.body.appendChild(panel);
     loadOrders();
